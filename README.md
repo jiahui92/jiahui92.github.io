@@ -5,9 +5,11 @@
 * 将xmind迁移到wiki上来
 * 分享、交流
 
-## tech
-* [hexo](https://hexo.io/)
-* [hexo-theme-Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten)
+
+## todo
+* Jenkinsfile
+* 将主题的依赖替换为cdn
+
 
 ## dev
 * git clone --recursive https://github.com/jiahui92/blog.git
@@ -16,5 +18,11 @@
 * npm run dev
 * npm run build
 
-## todo
-* 将主题的依赖替换为cdn
+## upgrade theme
+* 先在[hexo-theme-Wikitten:fork](https://github.com/jiahui92/hexo-theme-Wikitten)仓库里pull作者的最新代码 或者 改动自己的代码
+* 然后在本仓库 `git submodule update`
+
+
+## tech
+* [hexo](https://hexo.io/)
+* [hexo-theme-Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten)
