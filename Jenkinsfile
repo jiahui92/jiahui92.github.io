@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('update submodule') {
+      steps {
+        sh 'git submodule update'
+      }
+    }
+
     stage('build') {
       steps {
         sh 'docker build . -t blog'
