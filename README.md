@@ -11,7 +11,9 @@
 * [x] Jenkinsfile
 * [ ] footbar备案信息
 * [ ] 将主题的依赖替换为cdn
+* [ ] 主题部分资源未打包压缩
 * [ ] 优化UI
+  * [ ] h5
 
 
 ## dev
