@@ -1,4 +1,5 @@
 
+[传送门](https://guangjun.club)
 
 ## why this
 * 将零散知识逐步结构化整理
@@ -8,6 +9,7 @@
 
 ## todo
 * Jenkinsfile
+* footbar备案信息
 * 将主题的依赖替换为cdn
 
 
