@@ -3,7 +3,10 @@ pipeline {
   stages {
     stage('update submodule') {
       steps {
-        sh 'git submodule update'
+        sh '''pwd
+ls
+git submodule update
+'''
       }
     }
 
