@@ -24,6 +24,8 @@ COPY package*.json /app/
 RUN npm i --registry=https://registry.npm.taobao.org  --production
 # 拷贝所有源代码到工作目录，不需要拷贝的话可以在.dockerignore文件忽略
 COPY . /app
+# 复制主题配置文件
+COPY source/_theme_config.yml /app/themes/Wikitten/_config.yml
 
 EXPOSE 4000
 VOLUME [ "/root/logs" ]

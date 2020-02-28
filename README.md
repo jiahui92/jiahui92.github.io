@@ -8,9 +8,10 @@
 
 
 ## todo
-* Jenkinsfile
-* footbar备案信息
-* 将主题的依赖替换为cdn
+* [x] Jenkinsfile
+* [ ] footbar备案信息
+* [ ] 将主题的依赖替换为cdn
+* [ ] 优化UI
 
 
 ## dev
