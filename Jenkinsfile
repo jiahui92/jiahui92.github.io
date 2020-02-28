@@ -16,7 +16,7 @@ pipeline {
     stage('run') {
       steps {
         sh '''
-# 当container不存在时，返回true保证状态正常
+# when the container not exist, \'|| true\' can avoid the error 
 docker rm -f blog || true 
 docker run -d --name blog -p 4000:4000 -v ~/logs:/root/logs --restart always blog
 sleep 1
