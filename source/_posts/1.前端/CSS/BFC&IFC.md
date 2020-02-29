@@ -1,7 +1,7 @@
 ---
 title: BFC&IFC
 toc: true
-date: 2020-02-27 20:17:37
+date: 2020-02-27 00:00:03
 tags:
 ---
 
@@ -20,7 +20,9 @@ tags:
 * BFC是一个封闭的大箱子，里面无论怎么弄，都会包裹子元素
   * BFC父元素会包裹子元素的margin
   * BFC父元素会包裹浮动的子元素
-  * 特殊情况：只会被包裹inline子元素的content，其余被截断或超出父元素（overflow:hidden截断 | position:absolute超出）；但超出部分还是不会影响外部元素的排列；
+  * 特殊情况：当不包裹某些特别的子元素时，该子元素会超出父元素的border范围，但不会影响外部元素的排列（可能会挡住外面的元素）
+    * 不会包裹position:absolute的子元素
+    * 只包裹inline子元素的content
 * BFC元素不会被floatBox覆盖，普通元素会被覆盖（防止floatLeft覆盖rightDiv／取消img环绕效果）
 * 相邻块级BFC的垂直margin会发生折叠
 * 两列布局：自适应宽度
