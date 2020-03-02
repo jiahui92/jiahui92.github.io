@@ -1,5 +1,5 @@
 ---
-title: 回到首页
+title: 首页
 # toc: true
 ---
 
