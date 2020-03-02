@@ -12,8 +12,7 @@ tags:
 * 容器 container
   * docker run imageName
   * 容器是镜像的实例化，就像win10.iso是镜像，跑起来的虚拟机就是容器
-	* 每个程序在单独的容器里运行
-	* docker下的每个容器都是一个单独的系统环境，通过network的方式与宿主机通信
+  * docker下的每个容器都是一个单独的系统环境，通过network的方式与宿主机通信
 * volume 容器在宿主机的持久化存储空间（删除容器后，数据还在）
 * dockerHub 镜像仓库
 

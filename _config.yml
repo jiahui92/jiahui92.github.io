@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Wiki
+title: Whose Wiki
 subtitle: '光军的博客'
 description: '光军的博客'
-keywords: '光军,博客,wiki'
-author: guangjun
+keywords: '光军,博客,wiki,前端'
+author:  粤ICP备19110117号-1 | guangjun
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
