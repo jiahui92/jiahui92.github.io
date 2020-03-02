@@ -9,10 +9,10 @@ menu:
 # Customize
 customize:
     logo:
-        enabled: false
+        enabled: true
         width: 40
         height: 40
-        url: /logo.png
+        url: /img/logo.png
     profile:
         enabled: false # Whether to show profile bar
         avatar: # css/images/avatar.png
