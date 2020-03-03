@@ -1,0 +1,15 @@
+<% if (typeof(isHead) !== 'undefined' && isHead) { %>
+    <% if (theme.plugins.google_analytics) { %>
+        <%- partial('plugin/google-analytics') %>
+    <% } %>
+    <% if (theme.plugins.google_site_verification) { %>
+        <meta name="google-site-verification" content="<%= theme.plugins.google_site_verification %>" />
+    <% } %>
+    <% if (theme.plugins.baidu_analytics) { %>
+        <%- partial('plugin/baidu-analytics') %>
+    <% } %>
+<% } else { %>
+    <% if (theme.plugins.mathjax) { %>
+        <%- partial('plugin/mathjax') %>
+    <% } %>
+<% } %>
