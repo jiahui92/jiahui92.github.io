@@ -17,11 +17,11 @@
 
 
 ## dev
-* git clone --recursive https://github.com/jiahui92/blog.git
-* cp source/_theme_config.yml themes/Wikitten/_config.yml
-* npm i
-* npm run dev
-* npm run build
+```sh
+npm i
+npm run dev
+npm run build
+```
 
 
 ## tech
