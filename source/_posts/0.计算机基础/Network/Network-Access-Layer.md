@@ -15,11 +15,11 @@ tags:
 
 
 ## 网际相连
-一次互联网请求的过程： DNS --> IP --> 子网掩码 --> ARP --> MAC地址 【[参考资料](https://www.cnblogs.com/JuneWang/p/3917697.html)】
+一次互联网请求的过程： HTTP&&DNS --> TCP --> IP --> 子网掩码 --> ARP --> MAC地址 【[参考资料](https://www.cnblogs.com/JuneWang/p/3917697.html)】
 1. 通过DNS将域名解析成IP
 2. 通过子网掩码计算当前IP与目标IP是不是在同一个局域网内
 3. 是的话通过ARP获取MAC，如果不是的话，则要通过默认网关去寻找
-4. 网关重复1的过程
+4. 网关重复2的过程
 
 
 ### 有了 IP 地址，为什么还要用 MAC 地址
