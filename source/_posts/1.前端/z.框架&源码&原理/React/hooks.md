@@ -166,4 +166,4 @@ export const reducer = (state, action) => {
 
 
 ##  项目例子
-[hooks-movie-app](https://github.com/jiahui92/hooks-movie-app)
+[hooks-movie-app](https://github.com/samie820/hooks-movie-app)
