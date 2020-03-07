@@ -64,12 +64,6 @@ function Example() {
 ## Effect Hooks
 用于替代原来的生命周期钩子函数
 
-三种store方案
-* 激进：直接修改 this.$store.xxx
-* 中间：通过dispatch修改
-* 保守：dispatch再套一层再提供给App使用，会有更好的调试体验，但是写起来麻烦
-
-
 ```jsx
 function Example () {
 
@@ -94,8 +88,10 @@ function Example () {
 ## Reducer
 可以和contxt搭配起来使用，也可以单独作为一个简单的store管理
 
-
-
+三种程度的store
+* 激进：直接修改 this.$store.xxx
+* 中间：通过dispatch修改
+* 保守：dispatch再套一层再提供给App使用，会有更好的调试体验，但是写起来麻烦
 
 
 `const [state, dispatch] = useReducer(reducer, initialState)`
