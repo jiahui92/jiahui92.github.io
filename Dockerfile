@@ -29,6 +29,6 @@ EXPOSE 4000
 VOLUME [ "/root/logs" ]
 
 # RUN npm run test
-CMD npm run dev
+CMD npm start
 
 # docker run -d --name blog -p 4000:4000 -v ~/logs:/root/logs --restart always blog
