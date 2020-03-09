@@ -38,7 +38,7 @@ docker-compose up -d
 * 修改密码: Management > User > elastic
 
 ## Filebeat
-> filebeat启动后，可以留意console里输出的`harbor xxx`相关信息，里面包含了filebeat正在监听的日志文件，确保没有遗漏；如果是通过`systemctl`启动，可以通过`systemctl status filebeat -l`来查看查看日志
+> `filebeat -e`启动后，可以留意console里输出的`Harvester started for file: xxx`相关信息，里面包含了filebeat正在监听的日志文件，确保没有遗漏；如果是通过`systemctl`启动，可以通过`systemctl status filebeat -l`来查看查看日志
 * [filebeat + elasticsearch](https://www.heroyf.club/2018/08/15/elk/)
 * [filebeat + logstash](https://www.bmc.com/blogs/elasticsearch-logs-beats-logstash/)
 * [filebeat.module](https://www.cnblogs.com/minseo/p/10607540.html): filebeat有很多现成module，包括nginx、docker之类的，`filebeat modules enable nginx` 就可以获取nginx的日志了

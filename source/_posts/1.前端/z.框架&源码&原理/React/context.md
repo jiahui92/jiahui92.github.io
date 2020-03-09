@@ -1,11 +1,11 @@
 ---
 title: Context
 toc: true
-date: 2020-03-07 00:00:02
+date: 2020-03-07 00:00:03
 ---
 
 
-context：一个简单版的redux；【[参考资料](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)】
+context：可以用作一个简单版的redux来负责管理全局store；【[参考资料](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)】
 * Provider: 包在其中的组件都能读取context的值
 * Consumer: 包在其中的组件都能设置context的值
 
