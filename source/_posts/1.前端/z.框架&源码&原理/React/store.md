@@ -126,23 +126,40 @@ TODO: 感觉也可以吧？貌似又和良好的调试体验有关【[参考资�
 * mutation只能是同步函数（比如不能使用fetch），action没限制
 
 #### Mutation必须是同步函数
-devtool在每次调用Mutation时都会生成快照，要是Mutation里包含了异步函数，则会生成失败；【[参考资料](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-%E5%BF%85%E9%A1%BB%E6%98%AF%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0)】
+devtool在调用每个Mutation时都会生成快照，要是Mutation里包含了异步函数，则可能会生成失败；【[参考资料](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-%E5%BF%85%E9%A1%BB%E6%98%AF%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0)】
+
+![](/img/Snip20200310_1.png)
+
 ```js
-// 这种写法，严格模式下会报错
+actions: {
+  async login({ commit, state }, userId) {
+    try {
+      commit('setError', '');
+      commit('setLoading', true);
+      ...
+    } catch (error) {
+      commit('setError', error.message)
+    } finally {
+      commit('setLoading', false);
+    }
+  }
+},
 mutations: {
-  increment ({state}) {
-    fetch(() => {
-      state.count++
-    })
+  setError(state, error) {
+    state.error = error;
+  },
+  setLoading(state, loading) {
+    state.loading = loading;
   }
 }
 ```
 
+
 ### 三种修改store的办法
-三种程度的store，灵活取舍，简单项目可以用第二种，复杂用第三种；但在创建store时设置了`{strict:ture}`则只能通过mutation修改store，否则报错
+三种程度的store，灵活取舍，简单项目可以用第二种，复杂用第三种；但在创建store时设置了`{strict:true}`则只能通过mutation修改store，否则报错
 1. 激进：直接修改 `this.$store.xxx = 'xxx'`；虽然操作起来最快捷，但是这样store的修改逻辑会散落在项目各个角落，不好维护；
-2. 一般：在action里修改；比较简便，同时将store的修改逻辑都集中在store.js中，但是调试体验不好，不能使用vueDevTool的[时间旅行](https://juejin.im/post/5e0cbdd6e51d4541162c9493)功能；
-3. 保守：同步操作直接使用mutation，异步操作在action里通过commit来触发mutation修改store；调试体验最好，但是代码有点绕；
+2. 一般：在action里修改store；比较简便，同时将store的修改逻辑都集中在store.js中，但是调试体验不好，不能使用vueDevTool的[Time Travel](https://juejin.im/post/5e0cbdd6e51d4541162c9493)功能；
+3. 保守：同步操作直接使用mutation，异步操作在action里通过commit来触发mutation修改store；调试体验最好，但是代码有点绕；【[参考项目](https://github.com/sitepoint-editors/vue-chatkit/blob/master/src/store/actions.js)】
 
 ```js
 
@@ -158,6 +175,7 @@ ations: {
     })
   }
 }
+
 
 // 写法3：action --> mutations
 ations: {
