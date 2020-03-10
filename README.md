@@ -14,13 +14,13 @@
 * [ ] 主题部分资源未打包压缩
 * [ ] 优化UI
   * [ ] h5
+  * [ ] 目录转xmind
 
 
 ## dev
 ```sh
 npm i
-npm run dev
-npm run build
+npm start
 ```
 
 

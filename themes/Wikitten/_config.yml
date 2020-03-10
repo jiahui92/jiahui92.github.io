@@ -78,7 +78,7 @@ plugins:
     mathjax: true # options: true, false - to enable use Mathjax in your article
     google_analytics: 'UA-153525257-1' # enter the tracking ID for your Google Analytics
     google_site_verification: # enter Google site verification code
-    baidu_analytics: # enter Baidu Analytics hash key
+    baidu_analytics: '9a321f9cce7c095c3d4a87b8887721ee' # enter Baidu Analytics hash key
     busuanzi_count: true # options: true, false - to enable busuanzi site pv statistics
 
 # Miscellaneous

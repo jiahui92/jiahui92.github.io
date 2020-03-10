@@ -156,10 +156,10 @@ mutations: {
 
 
 ### 三种修改store的办法
-三种程度的store，灵活取舍，简单项目可以用第二种，复杂用第三种；但在创建store时设置了`{strict:true}`则只能通过mutation修改store，否则报错
+三种程度的store，灵活取舍；简单项目可以用第二种，当变得复杂时用第三种；但在创建store时设置了`{strict:true}`则只能通过mutation修改store，否则报错；
 1. 激进：直接修改 `this.$store.xxx = 'xxx'`；虽然操作起来最快捷，但是这样store的修改逻辑会散落在项目各个角落，不好维护；
 2. 一般：在action里修改store；比较简便，同时将store的修改逻辑都集中在store.js中，但是调试体验不好，不能使用vueDevTool的[Time Travel](https://juejin.im/post/5e0cbdd6e51d4541162c9493)功能；
-3. 保守：同步操作直接使用mutation，异步操作在action里通过commit来触发mutation修改store；调试体验最好，但是代码有点绕；【[参考项目](https://github.com/sitepoint-editors/vue-chatkit/blob/master/src/store/actions.js)】
+3. 保守：同步操作直接使用mutation，异步操作在action里通过commit来触发mutation修改store；调试体验最好（Time Travel 以及 能知道都触发了哪些Mutaction），但是代码有点绕；可能有时候代码复杂了，刚好需要抽mutation这一层来作代码复用；【[参考项目](https://github.com/sitepoint-editors/vue-chatkit/blob/master/src/store/actions.js)】
 
 ```js
 
