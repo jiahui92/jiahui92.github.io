@@ -133,7 +133,12 @@ proxy
 curl cip.cc
 ```
 
-
+#### proxychain
+[安装](https://www.harker.cn/archives/proxychains.html)
+```sh
+## 只要在需要代理的命令前加上proxychain4即可
+proxychains4 curl ip.cn
+```
 
 
 
