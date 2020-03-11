@@ -16,6 +16,11 @@
   * [ ] h5
   * [ ] 目录转xmind
   * [ ] 增加order字段
+* xmind
+  * 编写可维护的js.xmind
+  * Webpack.xmind
+  * Vue.xmind
+  * ./draf.md
 
 
 ## dev
