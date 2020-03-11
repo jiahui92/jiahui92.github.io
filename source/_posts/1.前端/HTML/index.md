@@ -20,13 +20,13 @@ tags:
 
 <body>
   <!-- 相当于 src="http://www.w3school.com.cn/i/eg_smile.gif" -->
-<img src="eg_smile.gif" />
-<!-- 自动往a标签增加target属性 -->
-<a href="http://www.w3school.com.cn">W3School</a>
-<!-- 相当于 href="http://www.w3school.com.cn/i/index.html" -->
-<a href="index.html">W3School</a>
-<!-- 这个href不会被改变 href="http://www.w3school.com.cn/index.html" -->
-<a href="/index.html">W3School</a>
+  <img src="eg_smile.gif" />
+  <!-- 自动往a标签增加target属性 -->
+  <a href="http://www.w3school.com.cn">W3School</a>
+  <!-- 相当于 href="http://www.w3school.com.cn/i/index.html" -->
+  <a href="index.html">W3School</a>
+  <!-- 这个href不会被改变 href="http://www.w3school.com.cn/index.html" -->
+  <a href="/index.html">W3School</a>
 </body>
 ```
 
