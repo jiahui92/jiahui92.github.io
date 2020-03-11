@@ -54,12 +54,12 @@ GPG: The GNU Privacy Guard，PGP的免费版本
 
 
 ## RSA与ECC椭圆曲线算法
-TODO 【[参考资料](https://www.zhihu.com/question/26662683
+[TODO] 【[参考资料](https://www.zhihu.com/question/26662683
 )】
 
 ![](/img/Snip20200305_26.png)
 
 
 ## 漏洞: openssl heartbleed
-TODO 当黑客访问服务器时，漏洞会给其随机返回内存中的一些内容，其中就可能包括密码信息【[参考资料1](https://www.zhihu.com/question/23328658/answer/24241031)】
+[TODO] 当黑客访问服务器时，漏洞会给其随机返回内存中的一些内容，其中就可能包括密码信息【[参考资料1](https://www.zhihu.com/question/23328658/answer/24241031)】
 【[参考资料2](https://zhuanlan.zhihu.com/p/19722474)】

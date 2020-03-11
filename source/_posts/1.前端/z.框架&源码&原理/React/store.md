@@ -108,7 +108,7 @@ reducer.js为什么要用 `"{...state}"`而不是直接在state上修改
 
 ### 与useContext的区别
 useContext一般用在全局和深层嵌套，useReducer用在局部组件中，要是项目比较简单，直接用useReducer也可以；
-> TODO: 复杂的我直接用useReducer当作全局state为啥不行？只要名字区分就好了吧？
+> [TODO]: 复杂的我直接用useReducer当作全局state为啥不行？只要名字区分就好了吧？
 
 
 ### 异步action
@@ -117,7 +117,7 @@ useContext一般用在全局和深层嵌套，useReducer用在局部组件中，
 * 另外reducer不支持异步，异步返回的state值会取不到
 * 最后为了有良好的调试体验；【[参考资料](https://cuyu.github.io/javascript/2017/04/25/Time-travel-in-Redux)】
 * 对于异步的action，可以使用redux-thunk来写，本质是改写了redux的dispatch，让其支持async；【[参考资料1](https://github.com/riskers/blog/issues/32)】【[参考资料2](https://github.com/sunyongjian/blog/issues/36)】
-* TODO: redux-saga, rxjs, mbox
+* [TODO]: redux-saga, rxjs, mbox
 ```js
 function actionCreator() {
   return async (dispatch) => {
