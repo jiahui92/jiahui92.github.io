@@ -113,8 +113,35 @@ useContext一般用在全局和深层嵌套，useReducer用在局部组件中，
 
 ### 异步action
 为什么不将ajax.search放在reducer.js里？这样还少几个action
+* 首先官方建议reducer是一个纯函数（简单的处理state，然后输出一个新的state）
+* 另外reducer不支持异步，异步返回的state值会取不到
+* 最后为了有良好的调试体验；【[参考资料](https://cuyu.github.io/javascript/2017/04/25/Time-travel-in-Redux)】
+* 对于异步的action，可以使用redux-thunk来写，本质是改写了redux的dispatch，让其支持async；【[参考资料1](https://github.com/riskers/blog/issues/32)】【[参考资料2](https://github.com/sunyongjian/blog/issues/36)】
+* TODO: redux-saga, rxjs, mbox
+```js
+function actionCreator() {
+  return async (dispatch) => {
+    dispatch({
+      type: 'LOADING'
+    })
 
-TODO: 感觉也可以吧？貌似又和良好的调试体验有关【[参考资料](https://cuyu.github.io/javascript/2017/04/25/Time-travel-in-Redux)】
+    try{
+      const response = await fetch(`https://example.com/`)
+      let data = await response.json()
+
+      dispatch({
+        type: 'SUCCESS',
+        payload: data
+      })
+    }catch(error) {
+      dispatch({
+        type: 'FAILURE',
+        error: error
+      })
+    }
+  };
+}
+```
 
 
 
