@@ -35,7 +35,7 @@ tags:
 js引擎与GUI线程是互斥的，只能执行其中一个【[参考资料](https://www.jianshu.com/p/202ec7e5bf74)】
 * 实际上并不存在GUI线程，这里应该是泛指Dom Tree、合成帧等与UI渲染相关的线程吧；
 * 互斥是为了防止js操作dom的过程中，GUI同时发生变更，可能会导致数据混乱；比如执行parseHtml到一半，然后突然并行执行js里的document.write，导致前面解析得到的Dom Tree与现在不符了；【[参考资料](https://www.zhihu.com/question/29797252)】
-* js与渲染的关系详细可看[EventLoop](./JSCore/EventLoop)
+* js与渲染的关系详细可看[EventLoop](/wiki/1.前端/z.框架_源码_原理/Browser/EventLoop)
 
 ```js
 $('body').css('background', 'red')
