@@ -151,6 +151,7 @@ function actionCreator() {
 * commit用来触发mutation
 * dispatch用来触发action
 * mutation只能是同步函数（比如不能使用fetch），action没限制
+* 因为redux依靠reducer返回的新state来修改store.state，所以对于异步操作依赖react-thunk；而vuex是直接赋值来修改store.state的，不会有异步的问题；对于mbox来说也是一样；
 
 #### Mutation必须是同步函数
 devtool在调用每个Mutation时都会生成快照，要是Mutation里包含了异步函数，则可能会生成失败；【[参考资料](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-%E5%BF%85%E9%A1%BB%E6%98%AF%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0)】
