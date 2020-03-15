@@ -190,7 +190,7 @@ drwxr-xr-x 11 root root 4.0K 2月  27 14:13 server
 ```sh
 chown -R guangjun . # 修改所有者
 chgrp -R staff . # 修改所属组
-chmod -777 .  # 777表示rwxrwxrwx
+chmod 777 .  # 777表示rwxrwxrwx
 chmod +x a.sh # 增加可执行权限
 ```
 

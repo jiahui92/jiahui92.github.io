@@ -17,9 +17,12 @@
   * [ ] 目录转xmind
   * [ ] 增加order字段
 * xmind
+  * Vue.i18
+  * Lib小库
   * Webpack.xmind
   * Vue.xmind
   * js.xmind
+  * html5.xmind
   * three.js.xmind
   * 编写可维护的js.xmind
   * 《深入浅出Node.js》.xmind

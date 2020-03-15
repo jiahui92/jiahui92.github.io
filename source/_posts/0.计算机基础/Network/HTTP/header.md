@@ -100,8 +100,9 @@ Pragma: no-cache
 * If-Unmodified-Since
 
 
-### 强缓存 private cache
+### 强缓存
 ```
+Cache-Control: public # 可以不提供max-age
 Cache-Control: max-age=60, must-revalidate
 ```
 must-revalidate的意思是"max-age=X, must-refetch"，一旦过期，必须重新请求整个文件
