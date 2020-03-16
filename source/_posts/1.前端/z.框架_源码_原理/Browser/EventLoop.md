@@ -5,14 +5,15 @@ date: 2020-03-12 00:00:06
 tags:
 ---
 
-* https://juejin.im/post/5b498d245188251b193d4059 （基础知识）
-* https://github.com/aooy/blog/issues/5 (结合渲染,dom操作/事件)
-* http://www.ruanyifeng.com/blog/2014/10/event-loop.html （着重看Node）
+* [基础知识](https://juejin.im/post/5b498d245188251b193d4059)
+* [结合渲染,dom操作/事件](https://github.com/aooy/blog/issues/5)
+* [着重看Node](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
+* [stackoverflow补充资料](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context)
 
 
 
 ## 宏任务 macrotask
-script, setTimeout、setInterval、ajax、domEvent(click等)
+script、setTimeout、setInterval、ajax、domEvent(click等)
 
 ## 微任务 microtask
 Promise、MutationObserver、postMessage
