@@ -12,7 +12,7 @@ tags:
 
 
 ## 宏任务 macrotask
-setTimeout、setInterval、ajax、domEvent(click等)
+script, setTimeout、setInterval、ajax、domEvent(click等)
 
 ## 微任务 microtask
 Promise、MutationObserver、postMessage
@@ -38,3 +38,20 @@ process.nextTiick、setImmediate
 * Promise pollyfill的依赖库[setimmediate](https://github.com/yuzujs/setImmediate)
 * 合理使用task来控制任务的优先级，比如浏览器通过macrotask来将ajax回调事件靠后处理；
 
+```js
+console.log('a');
+
+setTimeout(() => {
+  console.log('b');
+}, 0);
+
+console.log('c');
+
+Promise.resolve().then(() => {
+  console.log('d');
+}).then(() => {
+  console.log('e');
+});
+
+console.log('f');
+```
