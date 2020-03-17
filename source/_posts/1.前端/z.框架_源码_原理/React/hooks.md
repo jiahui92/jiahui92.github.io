@@ -55,6 +55,14 @@ function Example() {
   );
 }
 
+// 关联较大的多state写法，避免调用一堆setWidth, setHeight...
+const [state, setState] = useState({
+  width: 100,
+  height: 100,
+  left: 0,
+  top: 0
+});
+
 ```
 
 

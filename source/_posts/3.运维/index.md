@@ -6,6 +6,7 @@ tags:
 ---
 
 * [IT工具/系统评价排行](https://founderkit.com/)
+* [工具评价对比,what are the best](https://www.slant.co/)
 * [山月行blog](https://shanyue.tech/op)
 
 
