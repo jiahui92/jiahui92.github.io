@@ -14,17 +14,30 @@ tags:
 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): 查看打包后各模块体积大小
 
 ### tree-shaking
-tree-shaking必须要使用import来按需引用，`require`不支持
 ```sh
 # 这两种模式都会开启tree-shaking
 webpack --mode production
 webpack --optimize--minimize
 ```
 
+* tree-shaking必须要使用import来按需引用，`require`不支持；比如关闭babel的modules编译模式，防止import被编译成require导致webpack的tree-shaking失效
+```js
+// .babelrc
+{
+  "presets": [
+    "env", { "modules": false }
+  ]
+}
+```
+
+* 减少使用IIFE/立即函数调用
+* 适时设置packsge.json`sideEffects:false`，删掉无影响的副作用代码；"没有副作用"这个短语可以被解释为"不与顶层模块以外的东西进行交互"（比如没有设置window变量）；在b模块中虽然有一些副作用的代码(IIFE和更改全局变量/属性的操作)，但是我们不认为删除它是有风险的，比如console.log；【[参考资料](https://juejin.im/post/5bb8ef58f265da0a972e3434#heading-15)】
+
+
 ### code splitting
-* entry vendor: 指定包名称来拆分公共代码
-* split chunk: 更细粒度地拆分公共代码，比如按使用次数
-* [css插件](https://webpack.js.org/plugins/mini-css-extract-plugin/#install)
+* entry vendor: 指定包名称来拆分公共代码 【[参考资料](/wiki/1.前端/JavaScript/Webpack/config/entry_output)】
+* split chunk: 更细粒度地拆分公共代码，比如按使用次数【[参考资料](/wiki/1.前端/JavaScript/Webpack/config/optimization_chunks)】
+* [css-extract](https://webpack.js.org/plugins/mini-css-extract-plugin/#install)
 
 
 ### CDN

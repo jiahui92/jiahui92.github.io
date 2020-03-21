@@ -14,3 +14,4 @@ tags:
 * Mode
 * BrowserCompatiblity
 
+可以结合着插件开发的过程来了解各种config的意义
