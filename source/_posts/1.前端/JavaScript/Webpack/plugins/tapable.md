@@ -21,11 +21,19 @@ tags:
 ## 注册回调
 Sync的hook仅支持使用tap来注册事件，而Async的支持tap, tapAsync, tapPromise
 ```js
-xxx
+let { AsyncParallelHook } = require('tapable');
+let queue = new AsyncParallelHook(['name']);
+console.time('cost');
+queue.tapAsync('1', (name, callback) => {
+  setTimeout(() => {
+    console.log(1);
+    callback();
+  }, 1000)
+});
 ```
 
 * hooks.xxx.intercept 拦截
-* context: hooks方法间通信
+* context: hooks方法间数据共享
 
 
 ## webpack与Tapable的关系
