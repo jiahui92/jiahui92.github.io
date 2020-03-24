@@ -51,7 +51,7 @@ Cross-site request forgery 跨站请求伪造 【[参考资料](https://www.cnbl
 
 
 ### 应对
-* 使用POST请求并带上token [koa-jwt插件](https://juejin.im/post/5c009f02f265da616301c978)
+* 使用POST请求并带上token [koa-jwt插件](https://juejin.im/post/5c009f02f265da616301c978) [jwt的缺陷](https://learnku.com/articles/22616)
 * X-OPTIONS-FRAME等 [koa-helm插件](https://cnodejs.org/topic/5a502debafa0a121784a89c3)
 
 
