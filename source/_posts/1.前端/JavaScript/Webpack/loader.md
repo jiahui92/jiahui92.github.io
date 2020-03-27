@@ -17,10 +17,11 @@ tags:
 
 ## loader开发
 ### 基本操作
-【[官方文档](https://webpack.js.org/contribute/writing-a-loader/)】【[参考资料](https://imweb.io/topic/5d4a94a08db073cf44ca8cd0)】
+【[官方文档](https://webpack.js.org/contribute/writing-a-loader/)】【[参考资料](https://imweb.io/topic/5d4a94a08db073cf44ca8cd0)】 【[其它API](https://www.webpackjs.com/api/loaders/)】
 ```js
 // loader插件的结构一般为
-module.exports = (source) => {
+//    注意不要用箭头函数，否则踩中this指向的坑
+module.exports = function (source) {
   // TODO需要执行的逻辑
   this.callback(null,newContent, sourceMaps, meta);
   // callback和return只要选择其一即可
@@ -28,7 +29,7 @@ module.exports = (source) => {
 }
 
 
-module.exports = (source) => {
+module.exports = function (source) {
 
   // 再编译时，如果依赖和代码不变，则直接读缓存
   this.cacheable();
@@ -81,7 +82,7 @@ module.exports = function (source) {
 
 ### loader间数据共享
 ```js
-module.exports = (source) => {
+module.exports = function (source) {
   
   console.log(this.data.value);
   

@@ -17,7 +17,18 @@ tags:
   * entry: 表示在入口引入这些库；按照`.browserslist`来引入；
   * usage: 表示在使用的地方引入对应要兼容的api库；按照`.browserslist`来引入，且只引入使用过的api兼容库；
   * false: 表示不引入兼容库；
-* `targets.browserslist`：浏览器兼容性，最好是写在package.json文件，这样可以和postcss共用（详细看webpack.xmind）
+* `targets.browserslist`：浏览器兼容性，最好是写在`.browserslist`文件，这样可以和postcss共用（详细看[browserslist](/wiki/1.前端/JavaScript/Webpack/browerslist)）
+
+```json
+{
+  "presets": [
+      ["@babel/preset-env", {
+        "modules": false,
+        "useBuiltIns": "usage"
+      }], "@babel/preset-typescript"
+  ]
+}
+```
 
 
 ### babel-preset-stage
