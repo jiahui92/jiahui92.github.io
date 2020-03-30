@@ -1,5 +1,5 @@
 ---
-title: React
+title: index
 toc: true
 date: 2020-03-07 00:00:00
 ---
@@ -7,11 +7,72 @@ date: 2020-03-07 00:00:00
 
 
 
-## 脏值检查
+# 脏值检查
 起源于anglar1，框架定时对比state的所有值，检查出变更值，然后更新UI。而Vue和React则将该部分的工作移到了domDiff去，脏值检查变成了，脏dom检查。【[参考资料](https://www.cnblogs.com/eret9616/p/9155675.html)】
 
 
-## redux的依赖收集
+# setState
+注意里面利用的`Promise`来优化renderComponent的渲染次数，本来还以为用的是throttle；【[参考资料](https://zhuanlan.zhihu.com/p/44537887)】
+
+```js
+const queue = []; // setState的队列
+const renderQueue = [];
+
+function setState (stateChange, component) {
+  if (queue.length === 0) {
+    // 异步执行
+    Promise.resolve().then(flush);
+  }
+
+  queue.push({ stateChange, component });
+
+  if (!renderQueue.some(item => item === component)) {
+    renderQueue.push( component );
+  }
+}
+
+function renderComponent () {
+  let item;
+  while(item = queue.shift()) {
+    const { stateChange, component } = item;
+    // 更新组件的state
+    Object.assign(component.state, stateChange);
+  }
+
+  // 遍历渲染组件
+  while( component = renderQueue.shift() ) {
+    renderComponent(component);
+  }
+}
+```
+
+```js
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { num: 0 }
+  }
+
+  componentDidMount () {
+    this.setState({ num: this.state.num + 1 });
+    this.setState({ num: this.state.num + 2 });
+    this.setState({ num: this.state.num + 3 });
+  }
+
+  render () {
+    console.log(this.state.num);
+    return (
+      ...
+    );
+  }
+}
+
+// 0
+// 3
+```
+
+
+# redux的依赖收集
 通过connect来注入store，同时收集需要更新的组件；vue和mbox则是通过store.state.getter来收集需要更新的组件；
 ```js
 import { connect } from 'react-redux'
@@ -30,6 +91,6 @@ export default VisibleTodoList
 ```
 
 
-## Fiber调度算法
+# Fiber调度算法
 https://zhuanlan.zhihu.com/p/26027085
 

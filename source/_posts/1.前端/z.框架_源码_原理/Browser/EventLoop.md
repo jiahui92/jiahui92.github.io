@@ -1,7 +1,7 @@
 ---
 title: EventLoop
 toc: true
-date: 2020-03-12 00:00:06
+date: 2020-03-12 00:00:08
 tags:
 ---
 
@@ -13,10 +13,10 @@ tags:
 
 
 ## 宏任务 macrotask
-script、setTimeout、setInterval、ajax、domEvent(click等)
+script、setTimeout、setInterval、ajax、domEvent(click等)、postMessage
 
 ## 微任务 microtask
-Promise、MutationObserver、postMessage
+Promise、observer、MutationObserver
 process.nextTiick、setImmediate
 
 ## Node异步任务优先级
@@ -39,20 +39,37 @@ process.nextTiick、setImmediate
 * Promise pollyfill的依赖库[setimmediate](https://github.com/yuzujs/setImmediate)
 * 合理使用task来控制任务的优先级，比如浏览器通过macrotask来将ajax回调事件靠后处理；
 
+
+## 练习
 ```js
-console.log('a');
+async function asyncA () {
+  console.log('asyncA before');
+  await asyncB();
+  console.log('asyncA after');
+}
+
+async function asyncB () {
+  console.log('asyncB');
+}
+
+console.log('1');
 
 setTimeout(() => {
-  console.log('b');
+  console.log('setTimeout');
 }, 0);
 
-console.log('c');
+console.log('2');
 
-Promise.resolve().then(() => {
-  console.log('d');
+asyncA();
+
+console.log('3');
+
+new Promise((resolve) => {
+  console.log('Promise resolve');
+  resolve();
 }).then(() => {
-  console.log('e');
+  console.log('Promise then');
 });
 
-console.log('f');
+console.log('4');
 ```

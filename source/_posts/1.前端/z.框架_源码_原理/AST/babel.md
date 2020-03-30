@@ -51,6 +51,7 @@ babel-preset-react
 * 生成
 
 ### 词法分析 tokens流
+[拓展资料:vue的complier也是类似的](/wiki/1.前端/z.框架_源码_原理/Vue/complier)
 ```js
 if (1 > 0) {
   alert('if 1 > 0');

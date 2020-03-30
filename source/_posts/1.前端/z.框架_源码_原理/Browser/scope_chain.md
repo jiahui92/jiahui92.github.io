@@ -1,7 +1,7 @@
 ---
 title: 作用域链
 toc: true
-date: 2020-03-12 00:00:05
+date: 2020-03-12 00:00:06
 tags:
 ---
 
@@ -71,3 +71,15 @@ ECObj = {
   this: { ... }
 }
 ```
+
+
+## 练习
+```js
+var a = 1;
+(function a () {
+  // a = 20; // 严格模式下会报错"Assignment to constant variable"，普通模式会忽略
+  console.log(a); // function a {...}
+  console.log(window.a);
+})();
+```
+

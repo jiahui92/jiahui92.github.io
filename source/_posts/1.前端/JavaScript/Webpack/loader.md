@@ -23,7 +23,8 @@ tags:
 //    注意不要用箭头函数，否则踩中this指向的坑
 module.exports = function (source) {
   // TODO需要执行的逻辑
-  this.callback(null,newContent, sourceMaps, meta);
+  const callback = this.async(); // 尽量使用async，这样性能会更好
+  callback(null,newContent, sourceMaps, meta);
   // callback和return只要选择其一即可
   return transform(source);
 }
@@ -31,6 +32,7 @@ module.exports = function (source) {
 
 module.exports = function (source) {
 
+  const callback = this.async();
   // 再编译时，如果依赖和代码不变，则直接读缓存
   this.cacheable();
 
