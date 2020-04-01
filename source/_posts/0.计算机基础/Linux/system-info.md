@@ -31,6 +31,7 @@ cat /proc/uptime # 系统已经运行了多久
 
 
 ## 查看内存
+Linux会尽量多占用内存；buff/cache是可以释放的内存；
 ```sh
 free -h
 

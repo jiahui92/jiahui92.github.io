@@ -61,10 +61,9 @@ journalctl -u docker.service
 ### IPC
 进程间通信 Inter-Process Communication 【[参考资料](https://blog.csdn.net/dxdxsmy/article/details/6653189)】
 * 信号: 异步通信机制；订阅发布机制；
-* 管道: 通过shell来传递信息
-  * 匿名管道
-    * 管道描述符/管道id
-  * 命名管道 FIFO
+* 管道
+  * [匿名管道](https://www.cnblogs.com/chengmo/archive/2010/10/21/1856577.html): `cat 1.txt | grep 'xxx'`
+  * [命名管道FIFO](https://blog.csdn.net/ljianhui/article/details/10202699): 本质通过创建一个文件来交换信息
 * System V
   * 信号量
   * 共享内存

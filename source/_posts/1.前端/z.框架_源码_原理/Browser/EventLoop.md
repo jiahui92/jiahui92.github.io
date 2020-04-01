@@ -13,17 +13,18 @@ tags:
 
 
 ## 宏任务 macrotask
-script、setTimeout、setInterval、ajax、domEvent(click等)、postMessage
+script、setTimeout、setImmediate、setInterval、ajax、domEvent(click等)、postMessage
 
 ## 微任务 microtask
 Promise、observer、MutationObserver
-process.nextTiick、setImmediate
+process.nextTiick
+
 
 ## Node异步任务优先级
 【[参考资料](https://www.jianshu.com/p/d070e11ffa4d)】
 * idle观察者 > I/O观察者 > Check观察者
 * idle观察者: `process.nextTick`早已在等待系统空闲的回调
-* Check观察者: `setTimeout`等定时器
+* Check观察者: `setTimeout` `setImmediate`等定时器
 
 
 ## EventLoop
