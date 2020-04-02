@@ -21,11 +21,12 @@ tags:
 贪心、非贪心 `{n,m}?` `{n,}?` `??` `o+?` `o+` `o*?`
 
 
-# 回溯
+# 先行搜索
+继续匹配但不捕捉为结果，只是判断一下
 `(pattern)` 对匹配结果进行分组
-`(?=pattern)` 继续向后匹配看是否符合pattern
-`(?!pattern)` 继续向后匹配看是否不符合pattern
-`(?:pattern)` 继续向后匹配并丢弃匹配到的结果
+`(?=pattern)` 继续匹配看是否符合pattern
+`(?!pattern)` 继续匹配看是否不符合pattern
+`(?:pattern)` 继续匹配并丢弃匹配到的结果
 
 ![](/img/Snip20200330_1.png)
 
