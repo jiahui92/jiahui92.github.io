@@ -94,3 +94,13 @@ export default VisibleTodoList
 # Fiber调度算法
 https://zhuanlan.zhihu.com/p/26027085
 
+
+# 合成事件 SyntheticEvent
+【[官方文档](http://react.html.cn/docs/events.html)】【[参考资料](https://juejin.im/post/59db6e7af265da431f4a02ef)】
+* 在document上委托代理全局dom事件
+* 配合`event.target`和`event.type`找到真正的触发源和触发事件类型
+* 将真正的事件映射为合成事件，比如dom的onchange映射为onChange
+* event.stopPropagation只能阻止react的事件冒泡，不能阻止真正dom事件冒泡（可以使用ReactDOM.findDOM获取真正的dom，然后addEventListener来阻止dom事件冒泡）
+* event.nativeEvent.stopImmediatePropagation 常用于阻止document的事件执行
+
+

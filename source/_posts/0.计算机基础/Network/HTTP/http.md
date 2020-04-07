@@ -38,7 +38,7 @@ keep-alive只是复用了TCP连接，但是多个文件需要串行请求，此�
 
 ### 分桢、流传输
 解决http1.0的线头阻塞 【[参考资料](https://www.cnblogs.com/purpleraintear/p/6026071.html)】
-1. 分帧：将数据分为header、data等帧
+1. 分帧：将数据分为header、data等二进制帧
 2. 流传输：帧编码、乱序、并行
 ![](/img/Snip20200304_16.png)
 

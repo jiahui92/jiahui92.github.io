@@ -1,10 +1,21 @@
-
+---
+title: jsbug
+toc: true
+hidden: true
+date: 2020-04-07 00:00:01
+tags:
+---
 
 ## BFCache
 https://developer.mozilla.org/en-US/docs/Archive/Misc_top_level/Working_with_BFCache
 
+```
 onpageshow
 	=> event.presisted && location.reload();
+```
+
+将页面抽成组件调用，从而避免页面跳转
+
 
 
 ## 点透事件
