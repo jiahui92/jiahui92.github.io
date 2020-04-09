@@ -28,7 +28,7 @@
   * 《深入浅出Node.js》.xmind
   * 算法.xmind
   * AI.xmind
-  * ./draf.md
+  * draf/*.md
 
 
 ## dev

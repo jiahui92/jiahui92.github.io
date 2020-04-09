@@ -19,7 +19,7 @@ tags:
 
 
 ## 开发插件前的准备
-使用`hook`来开发插件，让开发者几乎可以介入到任意的webpack`构建流程`中。【[参考资料](https://juejin.im/post/5bdc1c1651882516f5784c34)】
+使用`hook`来开发插件，让开发者几乎可以介入到任意的webpack`构建流程`中。【[参考资料](https://juejin.im/post/5bdc1c1651882516f5784c34)】【[webpack官方 hook API](https://webpack.js.org/api/compiler-hooks/)】
 
 
 主要构建流程 | hook |
@@ -60,7 +60,7 @@ tags:
 
 
 ### 钩子是怎么被触发的
-下图触发了两个钩子`Complier.entryOption`和`Complier.afterPlugins`，以及在中途开始注册webpack.config中的plugins
+下图触发了两个钩子`Complier.entryOption`和`Complier.afterPlugins`，以及在中途开始注册webpack.config中的plugins 【[参考资料：webpack源码解析](https://juejin.im/post/5d418879f265da03af19b03f)】
 ```js
 #! /usr/bin/env node    
 const path = require('path');
