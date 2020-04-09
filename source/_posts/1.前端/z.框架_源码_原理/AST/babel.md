@@ -24,7 +24,8 @@ tags:
   "presets": [
       ["@babel/preset-env", {
         "modules": false,
-        "useBuiltIns": "usage"
+        "useBuiltIns": "usage",
+        "corejs": "3" // npm i -D core-js@3
       }], "@babel/preset-typescript"
   ]
 }

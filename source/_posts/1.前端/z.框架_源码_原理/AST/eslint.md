@@ -69,8 +69,11 @@ module.exports = {
 * [保存代码时自动修复](http://obkoro1.com/web_accumulate/accumulate/tool/Eslint%E8%87%AA%E5%8A%A8%E4%BF%AE%E5%A4%8D%E6%A0%BC%E5%BC%8F%E9%94%99%E8%AF%AF.html)
 
 ## 配合git commit
-必要时，可以使用`git commit --no-verify`绕过验证直接提交 【[参考资料](https://www.npmjs.com/package/pre-commit)】
+* 必要时，可以使用`git commit --no-verify`绕过验证直接提交 【[参考资料](https://www.npmjs.com/package/pre-commit)】
+* 假如不生效，可以排查一下`.git/hooks/`目录里是否有`pre-commit`文件 【[参考资料](https://stackoverflow.com/questions/42864386/npm-pre-commit-not-working)】
 ```json
+// npm i -D pre-commit
+
 // package.json
 {
   ...,
@@ -80,7 +83,7 @@ module.exports = {
   }
 }
 ```
-假如不生效，可以排查一下`.git/hooks/`目录里是否有`pre-commit`文件 【[参考资料](https://stackoverflow.com/questions/42864386/npm-pre-commit-not-working)】
+
 
 
 ## 其它问题

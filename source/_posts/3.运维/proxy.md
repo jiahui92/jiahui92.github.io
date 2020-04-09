@@ -134,11 +134,15 @@ curl cip.cc
 ```
 
 #### proxychain
-[安装](https://www.harker.cn/archives/proxychains.html)
+* [安装](https://www.harker.cn/archives/proxychains.html)
+* [在mac下无效的解决办法](https://zhuanlan.zhihu.com/p/21281236)： 关闭SIP（System Intergrity Protection）系统完整性保护
 ```sh
+brew install proxychains-ng 
 ## 只要在需要代理的命令前加上proxychain4即可
-proxychains4 curl ip.cn
+proxychains4 curl cip.cc # 此时会输出config文件的路径，通过vim来添加代理端口
 ```
-
-
+```
+[ProxyList]
+socks5 127.0.0.1 1080
+```
 
