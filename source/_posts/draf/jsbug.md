@@ -27,3 +27,5 @@ onpageshow
 * 增加oveflow:hidden修复完毕之后，弹出层的动作会导致，页面自动回滚到最顶部
 * 继续修复：overflow:hidden之后强行使页面偏移到滚动处；结束后再恢复；
 
+## 移动端 300ms click 延迟
+[配合meta和fastclick.js解决](https://www.jianshu.com/p/67bae6dfca90) : 在检测到touchend事件的时候，会通过DOM自定义事件立即出发模拟一个click事件，并把浏览器在300ms之后真正的click事件阻止掉

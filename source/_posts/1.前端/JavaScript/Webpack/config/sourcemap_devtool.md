@@ -15,6 +15,10 @@ tags:
 
 开发环境: cheap-module-eval-source-map
 生产环境: cheap-module-source-map
+```js
+const isProduction = process.env.production;
+const devtool = isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map';
+```
 
 
 ## soucemap
