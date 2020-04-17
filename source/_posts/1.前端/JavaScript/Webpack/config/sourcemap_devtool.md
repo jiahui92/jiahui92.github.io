@@ -16,8 +16,23 @@ tags:
 开发环境: cheap-module-eval-source-map
 生产环境: cheap-module-source-map
 ```js
-const isProduction = process.env.production;
+const isProduction = process.env.NODE_ENV === 'production';
 const devtool = isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map';
+
+module.exports = {
+  mode: isProduction ? 'production' : 'development',
+  devtool,
+  ...
+}
+```
+```json
+// package.json
+{
+  ...
+  "scripts": {
+    "build": "export NODE_ENV=production && webpack",
+  }
+}
 ```
 
 
