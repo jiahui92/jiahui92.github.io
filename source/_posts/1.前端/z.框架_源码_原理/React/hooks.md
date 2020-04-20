@@ -70,24 +70,32 @@ const [state, setState] = useState({
 
 
 ## Effect Hooks
-用于替代原来的生命周期钩子函数
+用于替代原来的`componentDidMount`, `componentDidUpdate`, `componentWillUnMount`生命周期钩子函数，但是像`componentWillMount`等其它生命周期就不存在了（可以尝试写在useEffect外面，再搭配计数器）；
 
 ```jsx
 function Example () {
 
-  // 相当于 componentDidMount, componentDidUpdate
+  // 相当于 componentDidMount
   useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  });
+    console.log(`You clicked ${count} times`);
+  }, []);
 
-  // 监听 count
+  // 相当于 componentDidMount + 监听count
   useEffect(() => {
-    document.title = `You clicked ${count} times`;
+    console.log(`You clicked ${count} times`);
   }, [count]);
 
-  // 相当于 componentWillMount, componentWillUnMount
+  // 相当于 componentDidMount + componentDidUpdate/监听所有state
   useEffect(() => {
-    document.title = `You clicked ${count} times`;
+    console.log(`You clicked ${count} times`);
+  });
+
+
+  //相当于 componentWillUnMount
+  useEffect(() => {
+    return () => {
+      console.log('componentWillUnMount');
+    }
   }, []);
 
 }

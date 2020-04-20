@@ -15,9 +15,12 @@ tags:
 
 开发环境: cheap-module-eval-source-map
 生产环境: cheap-module-source-map
+
+> 生成的sourcemap代码切勿上传到外网，否则会造成源码泄漏；可以配合[@sentry/webpack-plugin](https://www.npmjs.com/package/@sentry/webpack-plugin)上传到sentry
+
 ```js
 const isProduction = process.env.NODE_ENV === 'production';
-const devtool = isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map';
+const devtool = isProduction ? 'source-map' : 'cheap-module-eval-source-map';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
