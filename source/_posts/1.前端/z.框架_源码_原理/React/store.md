@@ -1,145 +1,74 @@
 ---
 title: Store
 toc: true
-date: 2020-03-07 00:00:05
+date: 2020-03-07 00:00:03
 ---
 
-## useReducer
-可以和contxt搭配起来使用，也可以单独作为一个简单的store管理；
 
-注意下面的三个文件`reducer.js, action.js, types.js`
-```jsx
-// ------------------ app.js
-import React, { useReducer, useEffect } from "react";
-
-function Example () {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const search = () => {
-    // dispatch: 用于派发action事件并传值来修改store
-    dispatch({
-      type: "SEARCH_MOVIES_REQUEST"
-    });
-
-    axios(`xxxx`).then(res => {
-      if (res.data.Response === "True") {
-        dispatch({
-          type: "SEARCH_MOVIES_SUCCESS",
-          movies: res.data.Search
-        });
-      } else {
-        dispatch({
-          type: "SEARCH_MOVIES_FAILURE",
-          error: res.data.Error
-        });
-      }
-    });
-  }
-
-  const { movies, errorMessage, loading } = state;
-
-  return ...;
-}
-
-
-// ------------------ store/reducer.js
-export const initialState = {
-  loading: true,
-  movies: [],
-  errorMessage: null
-};
-
-// reducer负责返回一个新的state
-export const reducer = (state, action) => {
-  switch (action.type) {
-    case "SEARCH_MOVIES_REQUEST":
-      return {
-        ...state, // immutable
-        loading: true,
-        errorMessage: null
-      };
-    case "SEARCH_MOVIES_SUCCESS":
-      return {
-        ...state,
-        loading: false, // 通常对应action的state默认值都写在reducer中，而不是通过dispatch传过来
-        movies: action.movies // state.movies必须从接口获取，所以只能依靠dispatch传来
-      };
-    case "SEARCH_MOVIES_FAILURE":
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
-      };
-    default:
-      return state;
-  }
-};
-
-
-// ------------------ store/action.js
-// 当action太多时，通常会抽一个文件来管理
-export const searchMoviesSuccess = (movies) => {
-  return {
-    movies,
-    type: 'SEARCH_MOVIES_SUCCESS',
-  }
-}
-// app.js中调用更改为 ==>  
-//    dispatch(searchMoviesSuccess(data))
-
-
-
-// ------------------ store/types.js
-// 当项目复杂时 app.js 、 action.js 、 reducer.js 中可能会出现较多重复的action事件名称，这时候也可以抽出来
-export const SEARCH_MOVIES_SUCCESS = 'SEARCH_MOVIES_SUCCESS'
-// 调用更改为
-import * as Types from 'store/types.js'
-Types.SEARCH_MOVIES_SUCCESS
-```
-
-### immutable
-reducer.js为什么要用 `"{...state}"`而不是直接在state上修改
-* `{...state}`每次都会返回一个新的state对象；在一些复杂的情况下，一直使用同一个state对象，可能会因为引用的问题，不小心修改state值而不知道，所以这里每次都会返回一个新的state对象； 【[参考资料](https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/)】
-* 当项目比较复杂时，最好是使用[immutable.js](https://juejin.im/post/5ac437436fb9a028c97a437c)；里面包含了一些特别优化：
-  * 比如避免了类似`{...state}`的浅层拷贝，要是state里包含对象的话，其实也可能会出现上述所说的引用问题；
-  * 同时也避免了用`deepClone`的拷贝性能浪费和深拷贝导致的全组件树都重新render的情况；
-
-
-
-### 与useContext的区别
-useContext一般用在全局和深层嵌套，useReducer用在局部组件中，要是项目比较简单，直接用useReducer也可以；
-> [TODO]: 复杂的我直接用useReducer当作全局state为啥不行？只要名字区分就好了吧？
-
-
-### 异步action
-为什么不将ajax.search放在reducer.js里？这样还少几个action
-* 首先官方建议reducer是一个纯函数（简单的处理state，然后输出一个新的state）
-* 另外reducer不支持异步，异步返回的state值会取不到
-* 最后为了有良好的调试体验；【[参考资料](https://cuyu.github.io/javascript/2017/04/25/Time-travel-in-Redux)】
-* 对于异步的action，可以使用redux-thunk来写，本质是改写了redux的dispatch，让其支持async；【[参考资料1](https://github.com/riskers/blog/issues/32)】【[参考资料2](https://github.com/sunyongjian/blog/issues/36)】
-* [TODO]: redux-saga, rxjs, mbox
+## useContext
+可以用作一个简单版的redux来负责管理全局store；
+* [参考资料: 配合useState](https://stackoverflow.com/questions/54738681/how-to-change-context-value-while-using-react-hook-of-usecontext)
+* [参考资料: 配合useReducer](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)
 ```js
-function actionCreator() {
-  return async (dispatch) => {
-    dispatch({
-      type: 'LOADING'
-    })
+const initialState = {
+  ...,
+  foreground: "#000000",
+};
 
-    try{
-      const response = await fetch(`https://example.com/`)
-      let data = await response.json()
+const reducer = (state, action) => {
 
-      dispatch({
-        type: 'SUCCESS',
-        payload: data
-      })
-    }catch(error) {
-      dispatch({
-        type: 'FAILURE',
-        error: error
-      })
+  switch (action.type) {
+
+    case 'SET_FOREGROUND': {
+      return {
+        ...state,
+        foreground: action.foreground
+      };
     }
-  };
+
+    default:
+      throw new Error();
+    }
+}
+
+const GlobalContext = React.createContext(initialState);
+
+export default { initialState, reducer, GlobalContext }
+```
+```html
+function App() {
+  const [ state, dispatch ] = useReducer(initialState, reducer);
+  return (
+    <GlobalContext.Provider value={{state, dispatch}}>
+      <Toolbar />
+    </GlobalContext.Provider>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+function ThemedButton() {
+  // 使用useContext替代<Consumer>的写法
+  const { state, dispatch } = useContext(GlobalContext);
+
+  function onClick () {
+    dispatch({
+      type: 'SET_FOREGROUND',
+      foreground: 'black'
+    })
+  }
+
+  return (
+    <button style={{ color: state.foreground }} onClick={onClick}>
+      I am styled by theme context!
+    </button>
+  );
 }
 ```
 

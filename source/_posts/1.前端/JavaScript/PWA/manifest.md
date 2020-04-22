@@ -1,12 +1,14 @@
 ---
-title: mainfest
+title: manifest
 toc: true
 date: 2020-03-01 00:00:01
 tags:
 ---
 
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
+
 ```js
-// mainfest.json
+// manifest.json
 {
 	name, // 安装横幅名
 	short_name, // 应用名
@@ -32,9 +34,9 @@ tags:
 ```css
 /* 响应式：自定义各种状态下的样式 */
 @media all and (display-mode: fullscreen) {
-    body {
-        margin: 0;
-    }
+	body {
+		margin: 0;
+	}
 }
 ```
 
@@ -45,13 +47,18 @@ tags:
 window.addEventListener('beforeinstallprompt', function (ev) {
 	
 	// 点击按钮才安装
-	installBtn.addEventListener("click", () => {
-			ev.prompt();
+	document.getElementById('btn').addEventListener("click", () => {
+		ev.prompt();
 	});
 
-	ev.userChoice.then(function (choiceResult) {
-			alert(choiceResult.outcome); // 是否安装应用
+	ev.userChoice.then((res) => {
+		alert(res.outcome === 'accepted'); // 是否安装应用
+		// outcome: accepted | dismissed
 	});
+
+	// 取消弹窗默认行为
+	ev.preventDefault();
+	return false;
 });
 ```
 

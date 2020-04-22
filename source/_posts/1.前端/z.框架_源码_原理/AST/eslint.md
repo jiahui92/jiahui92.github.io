@@ -39,6 +39,7 @@ module.exports = {
     "eslint:recommended",
     // "plugin:vue/recommended"
     // "plugin:react/recommended"
+    // "plugin:react-hooks/recommended"
   ],
   rules: {
     indent: ["error", 2],
@@ -80,6 +81,26 @@ module.exports = {
   "pre-commit": ["lint"],
   "script": {
     "lint": "eslint ./"
+  }
+}
+```
+
+## plugins 和 extends
+`extends`可以直接继承许多`rules`，但是`plugins`需要自己手动引入`rules`；二者选其一即可，大部分情况下都是使用`extends`；【[参考资料](https://www.jianshu.com/p/a0d72a8c8d62)】
+```js
+// eslintrc.js
+module.exports = {
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+  ],
+
+
+  plugins: [
+    "react", // eslint-plugin-react
+  ],
+  rules: {
+    "react/display-name": 2 // 手动引入plugins里的rules
   }
 }
 ```

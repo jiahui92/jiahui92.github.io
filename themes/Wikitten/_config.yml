@@ -25,7 +25,7 @@ customize:
     sidebar: left # sidebar position, options: left, right
     category_perExpand: false # enable article categories list per expanding
     thumbnail: true # enable posts thumbnail, options: true, false
-    favicon: /favicon.ico # path to favicon
+    favicon: /img/logo.png # path to favicon
     default_index_file: index.md # if this, it will display at site index instead of default index page
     social_links:
         github: https://guangjun.club

@@ -50,7 +50,7 @@ self.addEventListener('install', (event) => {
 	event.waitUntil(
     		caches.open('version_1.0.0')                  
     		.then(cache => cache.addAll([ // 如果所有的文件都成功缓存了，便会安装完成。如果任何文件下载失败了，那么安装过程也会随之失败。
-			'./index.html',        
+			    './index.html',        
       		'/js/script.js',
       		'/images/hello.png'
     		]))
