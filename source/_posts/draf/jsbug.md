@@ -19,7 +19,7 @@ onpageshow
 
 
 ## 移动端 300ms click 延迟
-[配合meta和fastclick.js解决](https://www.jianshu.com/p/67bae6dfca90) : 在检测到touchend事件的时候，会通过DOM自定义事件立即出发模拟一个click事件，并把浏览器在300ms之后真正的click事件阻止掉
+[使用fastclick.js解决](https://www.jianshu.com/p/67bae6dfca90) : 在检测到touchend事件的时候，会通过DOM自定义事件立即出发模拟一个click事件，并把浏览器在300ms之后真正的click事件阻止掉
 
 ```js
 // https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L305
