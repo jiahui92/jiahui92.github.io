@@ -1,3 +1,10 @@
+---
+title: other
+toc: true
+hidden: true
+date: 2020-04-27 00:00:10
+tags:
+---
 
 ## img跨域打点
 [参考资料](https://blog.csdn.net/FuDesign2008/article/details/6772108)
@@ -48,4 +55,3 @@ function imgLog(url) {
 [参考资料](https://www.barretlee.com/blog/2016/02/20/navigator-beacon-api/)
 * 未来可以切换到[beacon](https://zhuanlan.zhihu.com/p/41759633)，但网上说有bug；
 * 相比img打点，beacon可以在后台进程里打点，意味着切换页面不会丢失打点请求；
-  
