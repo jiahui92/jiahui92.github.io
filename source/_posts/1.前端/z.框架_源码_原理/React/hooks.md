@@ -5,8 +5,16 @@ date: 2020-03-07 00:00:02
 ---
 
 ## Hooks
-【[参考资料](https://reactjs.org/docs/hooks-overview.html)】
-* Functional Programming
+React16.8 为函数式提供可能并移除class【[参考资料](https://juejin.im/post/5d478b2d518825673a6ae1b9)】
+* class的缺点
+  * this指向
+  * super(props);
+  * 生命周期的重复逻辑
+* hooks优点
+  * useEffect合并多个生命周期方法
+  * 函数式编程
+    * 更好地共享非视图逻辑
+
 * [State Hooks](https://reactjs.org/docs/hooks-state.html)
 * [Effect Hooks](https://reactjs.org/docs/hooks-effect.html)
 * Your Own Hooks

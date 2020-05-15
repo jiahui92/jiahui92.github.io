@@ -5,8 +5,6 @@ date: 2020-03-07 00:00:00
 ---
 
 
-
-
 # 脏值检查
 起源于anglar1，框架定时对比state的所有值，检查出变更值，然后更新UI。而Vue和React则将该部分的工作移到了domDiff去，脏值检查变成了，脏dom检查。【[参考资料](https://www.cnblogs.com/eret9616/p/9155675.html)】
 
@@ -31,7 +29,7 @@ function setState (stateChange, component) {
   }
 }
 
-function renderComponent () {
+function flush () {
   let item;
   while(item = queue.shift()) {
     const { stateChange, component } = item;
@@ -72,6 +70,44 @@ class App extends Component {
 ```
 
 
+
+# Fiber调度算法
+[TODO](https://zhuanlan.zhihu.com/p/98295862)
+
+## React分三层
+* Virtual DOM
+* Reconciler: 负责调用组件生命周期方法，进行 Diff 运算等
+* Renderer: 根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和 ReactNative
+
+
+在React16中推出，主要解决React15中`Stack Reconciler`占用时间过长导致掉帧的问题；结合`window.requestIdleCallback`和每一个节点的domDiff后会检查并执行其它优先级更高的任务，确保不阻塞动画和用户交互事件；【[参考资料](https://segmentfault.com/a/1190000018250127?utm_source=tag-newest)】
+```js
+const fiber = { // 类似vue的组件树
+  stateNode, // 节点实例
+  child, // 子节点
+  sibling, // 兄弟节点
+  return, // 父节点
+}
+```
+* synchronous: 与之前的Stack Reconciler操作一样，同步执行
+* task: 在nexttick之前执行
+* animation: 下一帧之前执行
+* high: 在不久的将来立即执行
+* low: 稍微延迟执行也没关系
+* offscreen: 下一次render时或scroll时才执行
+
+
+
+# 合成事件 SyntheticEvent
+【[官方文档](http://react.html.cn/docs/events.html)】【[参考资料](https://juejin.im/post/59db6e7af265da431f4a02ef)】
+* 在document上委托代理全局dom事件
+* 配合`event.target`和`event.type`找到真正的触发源和触发事件类型
+* 将真正的事件映射为合成事件，比如dom的onchange映射为onChange
+* event.stopPropagation只能阻止react的事件冒泡，不能阻止真正dom事件冒泡（可以使用ReactDOM.findDOM获取真正的dom，然后addEventListener来阻止dom事件冒泡）
+* event.nativeEvent.stopImmediatePropagation 常用于阻止document的事件执行
+
+
+
 # redux的依赖收集
 通过connect来注入store，同时收集需要更新的组件；vue和mbox则是通过store.state.getter来收集需要更新的组件；
 ```js
@@ -89,18 +125,3 @@ const VisibleTodoList = connect(
 
 export default VisibleTodoList
 ```
-
-
-# Fiber调度算法
-https://zhuanlan.zhihu.com/p/26027085
-
-
-# 合成事件 SyntheticEvent
-【[官方文档](http://react.html.cn/docs/events.html)】【[参考资料](https://juejin.im/post/59db6e7af265da431f4a02ef)】
-* 在document上委托代理全局dom事件
-* 配合`event.target`和`event.type`找到真正的触发源和触发事件类型
-* 将真正的事件映射为合成事件，比如dom的onchange映射为onChange
-* event.stopPropagation只能阻止react的事件冒泡，不能阻止真正dom事件冒泡（可以使用ReactDOM.findDOM获取真正的dom，然后addEventListener来阻止dom事件冒泡）
-* event.nativeEvent.stopImmediatePropagation 常用于阻止document的事件执行
-
-

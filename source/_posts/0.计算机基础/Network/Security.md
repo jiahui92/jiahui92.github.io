@@ -46,13 +46,19 @@ Cross-site request forgery 跨站请求伪造 【[参考资料](https://www.cnbl
 * 引导用户访问该链接 `https://xxx.com/delete/1`
 * 引导用户访问包含该代码的页面 `<img src="https://xxx.com/delete/1" />`
 * 用隐藏form表单跨域POST
-* 嵌入iframe，然后遮挡住iframe里的重要按钮，引导用户去点击
 
 
 
 ### 应对
 * 使用POST请求并带上token [koa-jwt插件](https://juejin.im/post/5c009f02f265da616301c978) [jwt的缺陷](https://learnku.com/articles/22616)
-* X-OPTIONS-FRAME等 [koa-helm插件](https://cnodejs.org/topic/5a502debafa0a121784a89c3)
+* [koa-helm插件](https://cnodejs.org/topic/5a502debafa0a121784a89c3)
+
+
+
+## 点击挟持
+使用图片或按钮重叠在opacity的iframe某些元素上，引导用户去点击真实iframe上的按钮【[参考资料](https://blog.csdn.net/qq_32523587/article/details/79613768)】
+### 应对
+* X-OPTIONS-FRAME: SAMEORIGIN
 
 
 ------------------

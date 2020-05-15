@@ -30,7 +30,7 @@ HTTP1的请求是串行的，如果前面的请求太慢了，就会阻塞到后
 
 
 ### 多路复用
-keep-alive只是复用了TCP连接，但是多个文件需要串行请求，此时浏览器就做了一个优化，启动6~8个TCP连接来并行请求多个文件，但是这样子给服务器带来了一定的压力，不能够同时服务更多的用户（每个用户同时占用了多个TCP连接）。 多路复用后**同域名的所有通信都在一个TCP连接上完成**，将多TCP改为了多流通道，但是浏览器也会限制流通道的数目，并且request和response可以并行。【[参考资料1](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/14)】【[参考资料2](https://zhuanlan.zhihu.com/p/29609078)】
+keep-alive只是复用了TCP连接，但是多个文件需要串行请求，此时浏览器就做了一个优化，启动6~8个TCP连接来并行请求多个文件，但是这样子给服务器带来了一定的压力，不能够同时服务更多的用户（每个用户同时占用了多个TCP连接）。 多路复用后**同域名的所有通信都在一个TCP连接上完成**，将多TCP改为了多流通道，但是浏览器也会限制流通道的数目，并且request和response可以并行。但问题是一旦这个TCP丢包了，那么后续所有流程都会被阻塞；【[参考资料1](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/14)】【[参考资料2](https://zhuanlan.zhihu.com/p/29609078)】
 
 ![](https://pic1.zhimg.com/80/v2-dc7e9d5a6e2fe235fbf4687554998478_720w.jpg)
 
@@ -107,8 +107,7 @@ Upgrade: h2c
 
 
 ## HTTP3.0
-本质是http3（HTTP/2 over QUIC）将基于UDP，从而减少了连接时间【[参考资料](https://www.zhihu.com/question/302412059)】
+本质是http3（HTTP/2 over QUIC）将基于UDP，从而减少了连接时间；需要另外实现TCP的多路复用、流量控制、丢包重传等【[参考资料](https://www.zhihu.com/question/302412059)】
 * 大大缩短连接建立时间
 * 改进的拥塞控制
-
 
