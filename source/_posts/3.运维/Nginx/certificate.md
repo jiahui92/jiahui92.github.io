@@ -6,12 +6,15 @@ tags:
 ---
 
 
-使用[acme.sh](https://github.com/acmesh-official/acme.sh)安装证书，支持泛域名、自动续签；【[参考资料](https://jszbug.com/zxaiacja34.html)】
-
-
+* 使用[acme.sh](https://github.com/acmesh-official/acme.sh)安装证书，支持泛域名、自动续签；【[参考资料](https://jszbug.com/zxaiacja34.html)】
+* 登录域名管理后台（比如[腾讯域名管理 > 用户中心 > 密钥管理](https://console.dnspod.cn/account/token)）创建密钥
+* [其它域名管理商的密钥环境设置](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
 ```sh
+# 腾讯域名操作密钥
+export DP_Id="160111"
+export DP_Key="a000eeacxxxxa7fbf41xxxxxxxx"
 # 泛域名 注意要用双引号圈住，不然可能会报错
-acme.sh --issue --dns dns_cx -d example.com -d "*.example.com"
+acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club"
 ```
 
 证书生成完毕后，会在目录下看到这几个文件
