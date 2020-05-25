@@ -104,7 +104,7 @@ export default VisibleTodoList
 # React 15
 * 将react-dom抽离出react库：从多平台考虑，可以减少react-native的依赖，因为native端不会用到dom的逻辑
 * 移除data-reactid：避免了使用自动生成的id来缓存导致的出错，但同时需要使用`shouldComponentUpdate`减少组件的更新频率
-
+  * [更多优化技巧](wiki/1.前端/z.框架_源码_原理/React/optimize.md)
 ```js
 shouldComponentUpdate(nextProps, nextState) {
   // 注意对象和数组不能直接用引用地址判断
@@ -117,13 +117,14 @@ shouldComponentUpdate(nextProps, nextState) {
 # React 16
 * import PropTypes from 'prop-types';
 * React Fragment
-* 增加两个新的生命周期
+* Fiber
+* v16.3 增加两个新的生命周期
 * v16.8 中引入 hooks
 
 ## Fiber调度算法
 [Fiber源码](https://zhuanlan.zhihu.com/p/98295862)
 
-## React分三层
+React分三层
 * `Virtual DOM`
 * Reconciler: 负责调用组件生命周期方法，进行`DomDiff`等
 * Renderer: 根据不同的平台，渲染出(`DomPatch`)相应的页面，比较常见的是 ReactDOM 和 ReactNative
@@ -143,6 +144,78 @@ const fiber = { // 类似vue的组件树
   child, // 子节点
   sibling, // 兄弟节点
   return, // 父节点
+}
+```
+
+
+## 增加两个新的生命周期
+为了react17可打断的生命周期铺路；一般情况下，尽量少使用新的api【[参考资料](https://juejin.im/post/5aca20c96fb9a028d700e1ce)】
+* 丢弃: componentWillMount, componentWillReceiveProps, componentWillUpdate
+* 新增: static getDerivedStateFromProps, getSnapshotBeforeUpdate
+```js
+class Example extends React.Component {
+
+  state: {
+    filterText: '',
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // 代替和解决componentWillReceiveProps多次触发的问题：每次rerender时都会触发，而不是props变化才触发
+    if (prevState.filterText != state.filterText)
+    return {
+      filterText: state.filterText
+    }
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    // 代替componentWillUpdate
+  }
+}
+```
+
+
+### 生命周期执行顺序
+init
+* constructor
+* componentWillMount
+* render
+* componentDidMount
+* componentWillUnmount
+
+rerender
+* componentWillReceiveProps, getDerivedStateFromProps
+* shouldComponentUpdate
+* componentWillUpdate
+* render
+* getSnapshotBeforeUpdate
+* componentDidUpdate
+* componentWillUnmount
+
+
+
+## hooks
+[TODO]
+https://zhuanlan.zhihu.com/p/56975681
+
+* 要去理解hooks的原理
+  * 解释下面的原理，闭包相关
+  * 不能使用在if内嵌入useState
+```js
+function Form() {
+  const [text, updateText] = useState('');
+
+  const handleSubmit = useCallback(() => {
+    console.log(text);
+  }, [text]); // 每次 text 变化时 handleSubmit 都会变
+  // }, []); // 这样的话，text读取的是旧值？
+
+  return (
+    <>
+      <input value={text} onChange={(e) => updateText(e.target.value)} />
+      <!-- 很重的组件，不优化会死的那种 -->
+      <ExpensiveTree onSubmit={handleSubmit} />
+    </>
+  );
 }
 ```
 
@@ -173,30 +246,5 @@ class ErrorBoundary extends React.Component {
     }
     return this.props.children;
   }
-}
-```
-
-## hooks
-[TODO]
-https://zhuanlan.zhihu.com/p/56975681
-
-* 解释下面的原理，闭包相关
-* 要去理解hooks的原理
-```js
-function Form() {
-  const [text, updateText] = useState('');
-
-  const handleSubmit = useCallback(() => {
-    console.log(text);
-  }, [text]); // 每次 text 变化时 handleSubmit 都会变
-  // }, []); // 这样的话，text读取的是旧值？
-
-  return (
-    <>
-      <input value={text} onChange={(e) => updateText(e.target.value)} />
-      <!-- 很重的组件，不优化会死的那种 -->
-      <ExpensiveTree onSubmit={handleSubmit} />
-    </>
-  );
 }
 ```
