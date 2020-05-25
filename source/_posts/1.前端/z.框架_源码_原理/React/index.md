@@ -81,6 +81,15 @@ class App extends Component {
 
 
 
+
+# 不/受控组件
+[参考资料](http://www.ayqy.net/blog/%E4%BB%8Ecomponentwillreceiveprops%E8%AF%B4%E8%B5%B7/)
+* 受控组件：input值是被value和onChange控制的
+* 不受控组件：input值是dom自己管理的，需要通过ref来获取当前值
+* 全不受控组件：例如MyInput组件只提供defaultVal而不提供val；初始化后，内部的state就不可改了，可以使用key来刷新全不受控组件【[参考资料](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key)】
+
+
+
 ## redux的依赖收集
 通过connect来注入store，同时收集需要更新的组件；vue和mbox则是通过store.state.getter来收集需要更新的组件；
 ```js
@@ -118,11 +127,11 @@ shouldComponentUpdate(nextProps, nextState) {
 * import PropTypes from 'prop-types';
 * React Fragment
 * Fiber
-* v16.3 增加两个新的生命周期
+* v16.3 生命周期调整
 * v16.8 中引入 hooks
 
 ## Fiber调度算法
-[Fiber源码](https://zhuanlan.zhihu.com/p/98295862)
+[源码](https://zhuanlan.zhihu.com/p/98295862)
 
 React分三层
 * `Virtual DOM`
@@ -130,7 +139,7 @@ React分三层
 * Renderer: 根据不同的平台，渲染出(`DomPatch`)相应的页面，比较常见的是 ReactDOM 和 ReactNative
 
 
-在React16中推出，主要解决React15中`Stack Reconciler`占用时间过长导致掉帧的问题；结合`window.requestIdleCallback`和每一个节点的domDiff后会检查并执行其它优先级更高的任务，确保不阻塞动画和用户交互事件；一旦有优先级更高的任务打断了，那么【[参考资料](https://segmentfault.com/a/1190000018250127?utm_source=tag-newest)】
+在React16中推出，主要解决React15中`Stack Reconciler`占用时间过长导致掉帧的问题；结合`window.requestIdleCallback`和每一个节点的domDiff后会检查并执行其它优先级更高的任务，确保不阻塞动画和用户交互事件；【[参考资料](https://segmentfault.com/a/1190000018250127?utm_source=tag-newest)】
 * synchronous: 与之前的Stack Reconciler操作一样，同步执行
 * task: 在nexttick之前执行
 * [animation](https://react-cn.github.io/react/docs/animation.html): 下一帧之前执行
@@ -148,8 +157,8 @@ const fiber = { // 类似vue的组件树
 ```
 
 
-## 增加两个新的生命周期
-为了react17可打断的生命周期铺路；一般情况下，尽量少使用新的api【[参考资料](https://juejin.im/post/5aca20c96fb9a028d700e1ce)】
+## 生命周期调整
+为了react17的`Fiber Async Rendering` 可打断的生命周期铺路，一旦被打断，这些被废弃的生命周期都会被多次重新执行；一般情况下，尽量少使用新的api【[参考资料1](https://juejin.im/post/5aca20c96fb9a028d700e1ce)】【[参考资料2](https://www.html.cn/qa/react/14367.html)】
 * 丢弃: componentWillMount, componentWillReceiveProps, componentWillUpdate
 * 新增: static getDerivedStateFromProps, getSnapshotBeforeUpdate
 ```js
@@ -160,7 +169,7 @@ class Example extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    // 代替和解决componentWillReceiveProps多次触发的问题：每次rerender时都会触发，而不是props变化才触发
+    // static中不能使用this，避免了this.setState的副作用
     if (prevState.filterText != state.filterText)
     return {
       filterText: state.filterText
@@ -194,25 +203,70 @@ rerender
 
 
 ## hooks
-[TODO]
-https://zhuanlan.zhihu.com/p/56975681
+理解hooks的原理
 
-* 要去理解hooks的原理
-  * 解释下面的原理，闭包相关
-  * 不能使用在if内嵌入useState
+### 不能在if内使用useState
+```js
+let ref = {};
+let index = 0;
+const stateArr = [];
+
+function useState (val) {
+  stateArr[index] = val;
+  return [ stateArr[index], setState.bind(this, index++) ];
+}
+
+function setState (index, val) {
+  stateArr[index] = val;
+  render();
+}
+
+function useRef () {
+  return ref;
+}
+```
+
+
+### useCallback的闭包坑
+[参考资料](https://zhuanlan.zhihu.com/p/56975681)
 ```js
 function Form() {
   const [text, updateText] = useState('');
 
   const handleSubmit = useCallback(() => {
     console.log(text);
-  }, [text]); // 每次 text 变化时 handleSubmit 都会变
-  // }, []); // 这样的话，text读取的是旧值？
+  // }, []); // 坑一：这样的话，由于闭包的原因，text读取的是旧值
+  }, [text]); // 坑二：每次text变化时handleSubmit的值都会变，导致重新渲染ExpensiveTree组件
 
   return (
     <>
       <input value={text} onChange={(e) => updateText(e.target.value)} />
       <!-- 很重的组件，不优化会死的那种 -->
+      <ExpensiveTree onSubmit={handleSubmit} />
+    </>
+  );
+}
+```
+```js
+// 使用useRef和useLayoutEffect解决"坑二"
+// 或者把值丢在Form外面也是可以的吧？
+// 或者把state和handleSubmit抽离到reducer
+function Form() {
+  const [text, updateText] = useState('');
+  const textRef = useRef();
+
+  useLayoutEffect(() => {
+    textRef.current = text; // 将 text 写入到 ref
+  });
+
+  const handleSubmit = useCallback(() => {
+    const currentText = textRef.current; // 从 ref 中读取 text
+    alert(currentText);
+  }, []); // handleSubmit 只会依赖 textRef 的变化。不会在 text 改变时更新
+
+  return (
+    <>
+      <input value={text} onChange={e => updateText(e.target.value)} />
       <ExpensiveTree onSubmit={handleSubmit} />
     </>
   );

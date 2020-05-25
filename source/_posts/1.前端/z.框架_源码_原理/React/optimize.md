@@ -73,18 +73,3 @@ const someArr = useMemo(() => [1, 2, 3], []);
 
 * render函数中减少类似`onClick={()=>{doSomething()}}`的写法，每次调用render函数时均会创建一个新的函数，即使内容没有发生任何变化，也会导致节点没必要的重渲染
 * 参考上例，在hooks中更容易踩中这种坑，因为除了useCallback处理过的函数，每次都是重新生成的；
-
-
-
-# 工具
-router, redux
-
-
-# 受控组件和不受控组件
-http://www.ayqy.net/blog/%E4%BB%8Ecomponentwillreceiveprops%E8%AF%B4%E8%B5%B7/
-
-https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
-* 使用key来刷新不受控组件
-
-
-# 完整看一遍官方文档
