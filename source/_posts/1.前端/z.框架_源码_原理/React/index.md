@@ -113,7 +113,7 @@ export default VisibleTodoList
 # React 15
 * 将react-dom抽离出react库：从多平台考虑，可以减少react-native的依赖，因为native端不会用到dom的逻辑
 * 移除data-reactid：避免了使用自动生成的id来缓存导致的出错，但同时需要使用`shouldComponentUpdate`减少组件的更新频率
-  * [更多优化技巧](wiki/1.前端/z.框架_源码_原理/React/optimize.md)
+  * [更多优化技巧](/wiki/1.前端/z.框架_源码_原理/React/optimize.md)
 ```js
 shouldComponentUpdate(nextProps, nextState) {
   // 注意对象和数组不能直接用引用地址判断
