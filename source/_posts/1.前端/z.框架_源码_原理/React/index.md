@@ -85,9 +85,25 @@ class App extends Component {
 # 不/受控组件
 [参考资料](http://www.ayqy.net/blog/%E4%BB%8Ecomponentwillreceiveprops%E8%AF%B4%E8%B5%B7/)
 * 受控组件：input值是被value和onChange控制的
-* 不受控组件：input值是dom自己管理的，需要通过ref来获取当前值
+* 不受控组件：input值是dom自己管理的，需要通过ref来获取当前值；
 * 全不受控组件：例如MyInput组件只提供defaultVal而不提供val；初始化后，内部的state就不可改了，可以使用key来刷新全不受控组件【[参考资料](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key)】
 
+```js
+// 使用不受控组件可以写出更简单的代码（无需state、和onChange）
+function MyInput () {
+  const inputEl = useRef(null);
+  const onClick = () => {
+    console.log(inputEl.current.value);
+  }
+
+  return (
+    <>
+      <input ref={inputEl} />
+      <button onClick={onClick}>log value</button>
+    </>
+  );
+}
+```
 
 
 ## redux的依赖收集
@@ -274,6 +290,7 @@ function Form() {
 ```
 
 ## ErrorBoundary
+因为react里会有一些异步逻辑（比如Fiber的任务打断），直接使用try&catch不能完整捕获所有的Error；
 ```html
 <ErrorBoundary>
   <MyWidget />

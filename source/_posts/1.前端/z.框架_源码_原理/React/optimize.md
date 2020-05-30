@@ -73,3 +73,44 @@ const someArr = useMemo(() => [1, 2, 3], []);
 
 * render函数中减少类似`onClick={()=>{doSomething()}}`的写法，每次调用render函数时均会创建一个新的函数，即使内容没有发生任何变化，也会导致节点没必要的重渲染
 * 参考上例，在hooks中更容易踩中这种坑，因为除了useCallback处理过的函数，每次都是重新生成的；
+
+
+# React.lazy
+* 使用`Suspense`来处理加载中的情况
+* `import()`用于code spliting和动态加载
+* 使用`ErrorBoundary.componentDidCatch`处理异常
+```js
+// 普通用法
+import React, { Suspense } from 'react';
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+function MyComponent() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
+
+```js
+// react-router用法
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+      </Switch>
+    </Suspense>
+  </Router>
+);
+```

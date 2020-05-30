@@ -6,11 +6,11 @@ date: 2020-03-07 00:00:01
 
 
 * Mixin: ES6 class 版的 React 不支持mixin API，如果要使用类似功能可以用ES6 extend或者下面的HOC或者后续介绍的react hooks；最终的目的都是为了复用代码；
-
 * high-order component, HOC, 高阶组件: 一种复用组件间逻辑的组件（其实不是组件，而是函数）【[参考资料](https://reactjs.org/docs/higher-order-components.html)】
+* [react hooks hoc](https://medium.com/javascript-scene/do-react-hooks-replace-higher-order-components-hocs-7ae4a08b7b58)
+
 ```jsx
 const EnhancedComponent = higherOrderComponent(WrappedComponent)
-
 
 
 function higherOrderComponent (WrappedComponent) {
