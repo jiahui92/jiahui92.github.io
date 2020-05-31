@@ -34,3 +34,8 @@ function higherOrderComponent (WrappedComponent) {
 
 }
 ```
+
+```js
+// React Redux's `connect`
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
+```

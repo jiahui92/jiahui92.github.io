@@ -13,16 +13,18 @@ date: 2020-03-07 00:00:05
 
 
 # shouldComponentUpdate
+父组件更新之后触发render导致子组件render（即Reconciler的过程），所以引入shouldComponentUpdate来减少这种情况；而在vue中会通过依赖收集来避免这种情况；【[参考资料](https://segmentfault.com/a/1190000016494335)】
+> 对于对象和数组这种引用数据来说，通常需要使用[Immutable](/wiki/1.前端/z.框架_源码_原理/React/immutable.md)来创建一个新的对象或数组
+
 ```js
-shouldComponentUpdate(nextProps, nextState) {
+shouldComponentUpdate(nextProps, nextState, nextContext) {
   // 注意对象和数组不能直接用引用地址判断
   return nextState.someVal !== this.state.someVal;
 }
 ```
 
 # PureComponent
-自带shouldComponentUpdate props,state浅比较的组件
-* immutable object 或者返回一个新对象/数组
+自带shouldComponentUpdate props,state `浅比较`的组件
 
 # React.memo
 类似PureComponent，只不过时给functional component使用的，只会对prop进行浅比较
@@ -114,3 +116,8 @@ const App = () => (
   </Router>
 );
 ```
+
+
+# 调试工具
+* [react-perf-devtool](https://github.com/nitin42/react-perf-devtool): 可以知道哪些组件渲染了多少次
+* [react-profiler](https://zh-hans.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html): 官方工具

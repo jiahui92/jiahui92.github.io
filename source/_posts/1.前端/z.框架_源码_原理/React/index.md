@@ -112,13 +112,13 @@ function MyInput () {
 import { connect } from 'react-redux'
 
 const VisibleTodoList = connect(
-    [mapStateToProps], //参数1将 store 中的数据作为 props 绑定到组件上 
+  [mapStateToProps], //参数1将 store 中的数据作为 props 绑定到组件上 
 
-    [mapDispatchToProps], //参数2将 action 作为 props 绑定到组件上。
+  [mapDispatchToProps], //参数2将 action 作为 props 绑定到组件上。
 
-    [mergeProps], //参数3用于自定义merge流程，将stateProps 和 dispatchProps merge 到parentProps之后赋给组件。通常情况下，你可以不传这个参数，connect会使用 Object.assign。
+  [mergeProps], //参数3用于自定义merge流程，将stateProps 和 dispatchProps merge 到parentProps之后赋给组件。通常情况下，你可以不传这个参数，connect会使用 Object.assign。
 
-    [options] //如果指定这个参数，可以定制 connector 的行为。一般不用。
+  [options] //如果指定这个参数，可以定制 connector 的行为。一般不用。
 )(TodoList)
 
 export default VisibleTodoList
@@ -127,10 +127,16 @@ export default VisibleTodoList
 
 
 # React 15
+* 移除data-reactid：使用document.createElement替代innerHtml来mount后可以直接得到到组件的引用并用来进一步确定是否为同一个组件 【[参考资料](https://reactjs.org/blog/2016/04/07/react-v15.html#document.createelement-is-in-and-data-reactid-is-out)】
 * 将react-dom抽离出react库：从多平台考虑，可以减少react-native的依赖，因为native端不会用到dom的逻辑
-* 移除data-reactid：避免了使用自动生成的id来缓存导致的出错，但同时需要使用`shouldComponentUpdate`减少组件的更新频率
-  * [更多优化技巧](/wiki/1.前端/z.框架_源码_原理/React/optimize.md)
+* 新增`shouldComponentUpdate`来减少组件的更新频率【[更多优化技巧](/wiki/1.前端/z.框架_源码_原理/React/optimize.md)】
 ```js
+// 默认情况下一直返回true
+shouldComponentUpdate () {
+  return true;
+}
+
+// 自定义覆盖
 shouldComponentUpdate(nextProps, nextState) {
   // 注意对象和数组不能直接用引用地址判断
   return nextState.someVal !== this.state.someVal;
