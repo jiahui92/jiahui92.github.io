@@ -309,9 +309,15 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
+  static getDerivedStateFromError(error) {
+    // Display fallback UI
+    return { hasError: true };
+  }
+
   componentDidCatch(error, info) {
     // Display fallback UI
-    this.setState({ hasError: true });
+    // this.setState({ hasError: true });
+
     // You can also log the error to an error reporting service
     logErrorToMyService(error, info);
   }

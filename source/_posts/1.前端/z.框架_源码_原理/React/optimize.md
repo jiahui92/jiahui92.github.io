@@ -14,7 +14,7 @@ date: 2020-03-07 00:00:05
 
 # shouldComponentUpdate
 父组件更新之后触发render导致子组件render（即Reconciler的过程），所以引入shouldComponentUpdate来减少这种情况；而在vue中会通过依赖收集来避免这种情况；【[参考资料](https://segmentfault.com/a/1190000016494335)】
-> 对于对象和数组这种引用数据来说，通常需要使用[Immutable](/wiki/1.前端/z.框架_源码_原理/React/immutable.md)来创建一个新的对象或数组
+> 对于对象和数组这种引用数据来说，通常需要使用[Immutable](/wiki/1.前端/z.框架_源码_原理/React/immutable)来创建一个新的对象或数组
 
 ```js
 shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -81,6 +81,7 @@ const someArr = useMemo(() => [1, 2, 3], []);
 * 使用`Suspense`来处理加载中的情况
 * `import()`用于code spliting和动态加载
 * 使用`ErrorBoundary.componentDidCatch`处理异常
+
 ```js
 // 普通用法
 import React, { Suspense } from 'react';
