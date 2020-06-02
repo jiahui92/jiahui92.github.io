@@ -14,6 +14,9 @@ React16.8 为函数式提供可能并移除class【[参考资料](https://juejin
   * useEffect合并多个生命周期方法
   * 函数式编程
     * 更好地共享非视图逻辑
+* hooks缺点
+  * 因为函数式编程，需要手动使用`useCallback`做函数缓存优化，而class不需要
+  * `useEffect`需要手动管理依赖
 
 * [State Hooks](https://reactjs.org/docs/hooks-state.html)
 * [Effect Hooks](https://reactjs.org/docs/hooks-effect.html)

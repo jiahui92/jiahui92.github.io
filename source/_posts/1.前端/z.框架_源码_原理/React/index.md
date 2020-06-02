@@ -148,9 +148,11 @@ shouldComponentUpdate(nextProps, nextState) {
 # React 16
 * import PropTypes from 'prop-types';
 * React Fragment
+* Suspense & React.lazy & import()
 * Fiber
 * v16.3 生命周期调整
 * v16.8 中引入 hooks
+
 
 ## Fiber调度算法
 [源码](https://zhuanlan.zhihu.com/p/98295862)
