@@ -60,3 +60,25 @@ function imgLog(url) {
 # seo
 * 百度、谷歌 SEO工具
 * http://mtool.chinaz.com/
+
+
+
+# serverless
+[serverless](https://github.com/serverless/components/blob/master/README.cn.md)与docker相似，只不过针对特定的模版隐藏了特定的部署逻辑（Jenkinksfile,Dockerfile），这就意味着不需要自己去维护一台服务器，并安装jenkins和docker；FaaS是一种极致理想的应用情况；
+* template.yml配置环境：runtime[nodejs/python]、框架[express/koa/eggjs]
+* 直接使用云服务函数：数据库、对象存储、AI
+* 监控
+* 费用低：相比dokcer能做到按需使用、自动扩容（k8s也能做到）
+
+
+## 劣势
+* 不能登录主机操作
+* 假如使用了云函数，各厂商API不相同，应用迁移成本大
+
+
+## 应用
+* BFF
+* 轻量级API
+* 日志收集
+* [SSR](https://github.com/ykfe/egg-react-ssr)
+
