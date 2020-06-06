@@ -5,13 +5,13 @@ date: 2020-03-02 00:00:03
 tags:
 ---
 
-## 在线免费版
+# 在线免费版
 * sentry在线免费版每月10k报错量
   * 开源版本可自行搭建
 * fundebug在线免费版每月3k报错量
 
 
-## 安装
+# 安装
 [参考资料1](https://github.com/getsentry/onpremise), [参考资料2](https://zhuanlan.zhihu.com/p/51446011)
 * at least 2.4GB RAM
 ```sh
@@ -50,7 +50,7 @@ mail.from: '547652008@qq.com'
 * 测试客户端报错
 
 
-## 插件
+# 插件
 * `sentry-webpack-plugin`: webpack打包后自动上传sourcemap到sentry
 * `sentry-cli`: 更灵活定制sourcemap上传
 * 小程序SDK
@@ -58,6 +58,28 @@ mail.from: '547652008@qq.com'
   * https://github.com/youzan/raven-weapp
 
 
-## 录制回放
+# 录制回放
 * https://github.com/rrweb-io/rrweb/blob/master/README.zh_CN.md
 * https://logrocket.com/
+
+
+# 一些细节处理
+[参考资料](https://www.bugs.cc/p/javascript-integration-sentry/)
+## 自动上报注意跨域问题
+window.onerror采集错误时，跨域会导致错误信息不足`Script Error`
+* Access-Control-Allow-Origin
+* `<script src="xxx.com/path/to/x.js" crossorigin></script>`
+
+## 手动上报
+一些三方库会内部处理错误且不对外throw，此时需要借助`captureException(error, { extra: errorInfo })`和三方库的`errorHandler`手动上报
+* vue: config.errorHandler
+* react: componentDidCatch
+* jquery
+* defind
+* 异步代码: 拦截代理
+  * setTimeout, setInterval
+  * promise: unhandledrejection
+* 函数: webpack-plugin处理，使用`try,catch`包裹
+
+## 延时上报处理
+防止同时触发多次接口
