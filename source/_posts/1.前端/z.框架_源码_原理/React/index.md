@@ -106,25 +106,6 @@ function MyInput () {
 ```
 
 
-## redux的依赖收集
-通过connect来注入store，同时收集需要更新的组件；vue和mbox则是通过store.state.getter来收集需要更新的组件；
-```js
-import { connect } from 'react-redux'
-
-const VisibleTodoList = connect(
-  [mapStateToProps], //参数1将 store 中的数据作为 props 绑定到组件上 
-
-  [mapDispatchToProps], //参数2将 action 作为 props 绑定到组件上。
-
-  [mergeProps], //参数3用于自定义merge流程，将stateProps 和 dispatchProps merge 到parentProps之后赋给组件。通常情况下，你可以不传这个参数，connect会使用 Object.assign。
-
-  [options] //如果指定这个参数，可以定制 connector 的行为。一般不用。
-)(TodoList)
-
-export default VisibleTodoList
-```
-
-
 
 # React 15
 * 移除data-reactid：使用document.createElement替代innerHtml来mount后可以直接得到到组件的引用并用来进一步确定是否为同一个组件 【[参考资料](https://reactjs.org/blog/2016/04/07/react-v15.html#document.createelement-is-in-and-data-reactid-is-out)】

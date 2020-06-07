@@ -64,7 +64,8 @@ function imgLog(url) {
 
 
 # serverless
-[serverless](https://github.com/serverless/components/blob/master/README.cn.md)与docker相似，只不过针对特定的模版隐藏了特定的部署逻辑（Jenkinksfile,Dockerfile），这就意味着不需要自己去维护一台服务器，并安装jenkins和docker；FaaS是一种极致理想的应用情况；
+
+[serverless](https://github.com/serverless/components/blob/master/README.cn.md)与docker相似，只不过针对特定的模版隐藏了特定的部署逻辑（Jenkinksfile,Dockerfile），这就意味着不需要自己去维护一台服务器，并安装jenkins和docker（不需要运维）；FaaS是一种极致理想的应用情况；
 * template.yml配置环境
   * runtime[nodejs/python]、框架[express/koa/eggjs]
   * 网关配置：域名等（替代nginx）
@@ -84,3 +85,19 @@ function imgLog(url) {
 * 日志收集
 * [SSR](https://github.com/ykfe/egg-react-ssr)
 
+## 插件开发
+[TODO] 原理
+
+
+
+# 中台
+【[参考资料](https://www.zhihu.com/question/57717433)】
+* 一般指业务中台；当公司出现多种类似业务时（比如淘宝、咸鱼都是电商应用，商品详情页、下单、购物车这些逻辑几乎都是一样的，没必要写多套后端逻辑），为了尽可能复用，抽出中台这一概念，一个中台服务多个业务；但是对于不同业务，偶尔需要做一些不同的处理或配置，此时可能需要搭建后台来完成值、流程配置等； 
+* 对于前端来说，感觉和原来的公共组件其实差不多；只不过也是要尽可能兼容多个业务，对于不同业务的特殊逻辑可能也是要通过配置来处理；还有一点比较特殊的是前端的UI往往不可复用/复用成本比较大；
+* 劣势
+  * 特殊逻辑一般需要给中台提需求，一个项目会有更多的人参与进来；同时一个中台部门需要同时支持多个业务部门；
+  * 历史遗留问题，架构调整，需要将原来多个类似后端业务合并为一个；
+  * API要设计得很好，保持拓展性以兼容未来的业务，否则可能会越来越难用；
+
+* 技术中台
+* 数据中台

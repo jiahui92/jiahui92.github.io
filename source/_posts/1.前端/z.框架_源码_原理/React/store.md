@@ -4,7 +4,7 @@ toc: true
 date: 2020-03-07 00:00:03
 ---
 
-
+# React
 ## useContext
 可以用作一个简单版的redux来负责管理全局store；
 * [参考资料: 配合useState](https://stackoverflow.com/questions/54738681/how-to-change-context-value-while-using-react-hook-of-usecontext)
@@ -73,8 +73,153 @@ function ThemedButton() {
 ```
 
 
+## Redux
+[TODO]原理
+
+* [redux](https://github.com/reduxjs/redux#the-gist)
+* [react-redux](https://redux-toolkit.js.org/tutorials/basic-tutorial): 对redux的一层封装
+  * [configureStore自带react-thunk,logger](https://redux-toolkit.js.org/api/getDefaultMiddleware)
+  * [createSlice自带immer.js](https://redux-toolkit.js.org/tutorials/intermediate-tutorial)
+* [mobox]()
+
+```js
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from 'features/todos/todosSlice'
+
+const mapDispatchToProps = { addTodo }
+
+const AddTodo = ({ addTodo }) => {
+  const [todoText, setTodoText] = useState('')
+
+  const onChange = e => setTodoText(e.target.value)
+
+  return (
+    <div>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          if (!todoText.trim()) return;
+          addTodo(todoText)
+          setTodoText('')
+        }}
+      >
+        <input value={todoText} onChange={onChange} />
+        <button type="submit">Add Todo</button>
+      </form>
+    </div>
+  )
+}
+
+// connect是个高阶组件
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
+```
+
+```js
+// features/todos/todosSlice
+import { createSlice } from '@reduxjs/toolkit'
+
+let nextTodoId = 0
+
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    addTodo: {
+      reducer(state, action) {
+        const { id, text } = action.payload
+        state.push({ id, text, completed: false })
+      },
+      prepare(text) {
+        return { payload: { text, id: nextTodoId++ } }
+      }
+    },
+    toggleTodo(state, action) {
+      const todo = state.find(todo => todo.id === action.payload)
+      if (todo) {
+        todo.completed = !todo.completed
+      }
+    }
+  }
+})
+
+// slice是语法糖，内部自动生成reducer和action
+export const { addTodo, toggleTodo } = todosSlice.actions
+
+export default todosSlice.reducer
+```
+
+### redux middleware
+【[参考资料1](https://redux.js.org/advanced/middleware)】
+【[参考资料2](https://cn.redux.js.org/docs/advanced/Middleware.html)】
+【[参考资料3](https://juejin.im/post/5b34acee6fb9a00e60442473)】
+```js
+function createStore (reducer, initialState, enhancer) {
+  let state = initialState
+  const listeners = []
+  const store = {
+    getState () {
+      return state
+    },
+    dispatch (action) {
+      state = reducer(state, action)
+      listeners.forEach(listener => listener())
+    },
+    subscribe (listener) {
+      listeners.push(listener)
+    }
+  }
+
+  // applyMiddleware
+  enhancer(store)
+
+  return store;
+}
+
+function applyMiddleware (...middlewares) {
+  return (store) => {
+    const chains = middlewares.map(middleware => middleware(store))
+    store.dispatch = compose(...chains)(store.dispatch)
+  }
+}
 
 
+const store = createStore(
+  todoApp,
+  initialState,
+  applyMiddleware(
+    rafScheduler,
+    timeoutScheduler,
+    thunk,
+    vanillaPromise,
+    readyStatePromise,
+    logger,
+    crashReporter
+  )
+)
+```
+
+```js
+const thunk = store => next => action =>
+  typeof action === 'function'
+    ? action(store.dispatch, store.getState)
+    : next(action)
+
+
+// this is a thunkAction
+function incrementAsync () {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(increment())
+    }, 1000)
+  }
+}
+
+dispatch(incrementAsync())
+```
+
+
+# Vue
 ## Vuex
 ### Vuex中的概念
 * commit用来触发mutation
@@ -115,7 +260,7 @@ mutations: {
 ### 三种修改store的办法
 三种程度的store，灵活取舍；简单项目可以用第二种，当变得复杂时用第三种；但在创建store时设置了`{strict:true}`则只能通过mutation修改store，否则报错；
 1. 激进：直接修改 `this.$store.xxx = 'xxx'`；虽然操作起来最快捷，但是这样store的修改逻辑会散落在项目各个角落，不好维护；
-2. 一般：在action里修改store；比较简便，同时将store的修改逻辑都集中在store.js中，但是调试体验不好，不能使用vueDevTool的[Time Travel](https://juejin.im/post/5e0cbdd6e51d4541162c9493)功能；
+2. 一般：在不经过action而直接通过mutation修改store；比较简便，同时将store的修改逻辑都集中在store.js中，但是不能使用vueDevTool的[Time Travel](https://juejin.im/post/5e0cbdd6e51d4541162c9493)功能（依赖commit）；
 3. 保守：同步操作直接使用mutation，异步操作在action里通过commit来触发mutation修改store；调试体验最好（Time Travel 以及 能知道都触发了哪些Mutaction），但是代码有点绕；可能有时候代码复杂了，刚好需要抽mutation这一层来作代码复用；【[参考项目](https://github.com/sitepoint-editors/vue-chatkit/blob/master/src/store/actions.js)】
 
 ```js

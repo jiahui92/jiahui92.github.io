@@ -229,7 +229,7 @@ Types.SEARCH_MOVIES_SUCCESS
 ### immutable
 reducer.js为什么要用 `"{...state}"`而不是直接在state上修改
 * `{...state}`每次都会返回一个新的state对象；在一些复杂的情况下，一直使用同一个state对象，可能会因为引用的问题，不小心修改state值而不知道，所以这里每次都会返回一个新的state对象； 【[参考资料](https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/)】
-* 当项目比较复杂时，最好是使用[immutable.js](https://juejin.im/post/5ac437436fb9a028c97a437c)；里面包含了一些特别优化：
+* 当项目比较复杂时，最好是使用immer.js
   * 比如避免了类似`{...state}`的浅层拷贝，要是state里包含对象的话，其实也可能会出现上述所说的引用问题；
   * 同时也避免了用`deepClone`的拷贝性能浪费和深拷贝导致的全组件树都重新render的情况；
 
