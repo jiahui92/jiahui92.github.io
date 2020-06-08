@@ -6,7 +6,7 @@ date: 2020-03-07 00:00:03
 
 # React
 ## useContext
-可以用作一个简单版的redux来负责管理全局store；
+可以用作一个简单版的redux来负责管理全局store；但相比`react-redux`这个库来说少了很多细节，比如内置的`thunk`,`immer.js`和很多helper函数
 * [参考资料: 配合useState](https://stackoverflow.com/questions/54738681/how-to-change-context-value-while-using-react-hook-of-usecontext)
 * [参考资料: 配合useReducer](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)
 ```js
@@ -74,13 +74,11 @@ function ThemedButton() {
 
 
 ## Redux
-[TODO]原理
-
 * [redux](https://github.com/reduxjs/redux#the-gist)
 * [react-redux](https://redux-toolkit.js.org/tutorials/basic-tutorial): 对redux的一层封装
   * [configureStore自带react-thunk,logger](https://redux-toolkit.js.org/api/getDefaultMiddleware)
   * [createSlice自带immer.js](https://redux-toolkit.js.org/tutorials/intermediate-tutorial)
-* [mobox]()
+  * [使用immer.produce包裹reducer.switch](https://dev.to/mercatante/simplify-your-redux-reducers-with-immer-3e51)
 
 ```js
 import React, { useState } from 'react'
@@ -143,17 +141,35 @@ const todosSlice = createSlice({
   }
 })
 
+
 // slice是语法糖，内部自动生成reducer和action
 export const { addTodo, toggleTodo } = todosSlice.actions
 
 export default todosSlice.reducer
 ```
 
-### redux middleware
-【[参考资料1](https://redux.js.org/advanced/middleware)】
-【[参考资料2](https://cn.redux.js.org/docs/advanced/Middleware.html)】
-【[参考资料3](https://juejin.im/post/5b34acee6fb9a00e60442473)】
 ```js
+// createSlice返回以下对象
+{
+  name: "todos",
+  reducer: (state, action) => newState,
+  actions: {
+    addTodo: (payload) => ({type: "todos/addTodo", payload}),
+    toggleTodo: (payload) => ({type: "todos/toggleTodo", payload})
+  },
+  caseReducers: {
+    addTodo: (state, action) => newState,
+    toggleTodo: (state, action) => newState,
+  }
+}
+```
+
+### createStore
+* `Provider`用于注入`this.context`，从而将`store`一层层往下传
+* `connect`是一个高阶组件，内部会通过`context`获取`store`上的`state`和`dispatch`，并使用`subscribe`订阅更新【[参考资料](https://imweb.io/topic/5a1969b2a192c3b460fce226)】
+
+```js
+// 数据更新流程： dispatch --> reducer --> listener/connect --> setState
 function createStore (reducer, initialState, enhancer) {
   let state = initialState
   const listeners = []
@@ -162,19 +178,31 @@ function createStore (reducer, initialState, enhancer) {
       return state
     },
     dispatch (action) {
-      state = reducer(state, action)
-      listeners.forEach(listener => listener())
+      state = reducer(state, action) // dispatch触发执行reducer
+      listeners.forEach(listener => listener()) // 触发各订阅组件更新
     },
+    // connect通过subscribe订阅更新
     subscribe (listener) {
       listeners.push(listener)
     }
   }
 
-  // applyMiddleware
+  // 通常是applyMiddleware
   enhancer(store)
 
   return store;
 }
+
+// 内部会通过subscribe来订阅更新
+connect(mapStateToProps, mapDispatchToProps, mergeProps)(MyComponent)
+```
+
+
+### middleware
+【[参考资料1](https://redux.js.org/advanced/middleware)】
+【[参考资料2](https://cn.redux.js.org/docs/advanced/Middleware.html)】
+【[参考资料3](https://juejin.im/post/5b34acee6fb9a00e60442473)】
+```js
 
 function applyMiddleware (...middlewares) {
   return (store) => {
@@ -217,6 +245,53 @@ function incrementAsync () {
 
 dispatch(incrementAsync())
 ```
+
+### hook
+不需要再使用`connect`高阶组件来订阅更新了，无法带来小范围render的优化；
+```js
+import React from 'react';
+import * as actions from '../actions';
+import {useSelector, useDispatch} from 'react-redux';
+
+const App = () => {
+  const dispatch = useDispatch();
+  const count = useSelector(store => store.count);
+
+  return (
+    <div>
+      <h1>The count is {count}</h1>
+      <button onClick={() => dispatch(actions.increment(count))}>+</button>
+      <button onClick={() => dispatch(actions.decrement(count))}>-</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### 优化
+【[参考资料](https://juejin.im/post/596db2f9f265da6c4602ffc3)】
+```js
+connect(
+  mapStateToProps: (state, ownProps?) => Object, // 只注入必要的state
+  mapDispatchToProps, // 只注入必要的dispatch
+  mergeProps, // 默认是Object.assign({}, ownProps, stateProps, dispatchProps)
+  {
+    pure = true, // 默认值，这时候connector将执行shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新
+    areStatesEqual = strictEqual,
+    areOwnPropsEqual = shallowEqual,
+    areStatePropsEqual = shallowEqual,
+    areMergedPropsEqual = shallowEqual,
+    ...extraOptions
+  } = {}
+)
+```
+
+
+## Mobx
+[TODO]
+通过Proxy.getter订阅组件更新，setter来触发更新
+
 
 
 # Vue

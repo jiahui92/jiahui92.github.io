@@ -13,7 +13,7 @@ tags:
 
 
 ## 原理
-vue直接用nuxt.js，react直接用next.js【[参考资料](https://www.jianshu.com/p/b566a0e2bd56)】
+vue直接用nuxt.js，react直接用umi.js/next.js【[参考资料](https://www.jianshu.com/p/b566a0e2bd56)】
 * ReactDom.server.renderToString，应该是服务端的一套特殊domDiff吧
 * 浏览器端重新执行一遍js，覆盖服务端的htmlString
 

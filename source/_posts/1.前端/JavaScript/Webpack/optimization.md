@@ -38,6 +38,7 @@ webpack --optimize--minimize
 * entry vendor: 指定包名称来拆分公共代码 【[参考资料](/wiki/1.前端/JavaScript/Webpack/config/entry_output)】
 * split chunk: 更细粒度地拆分公共代码，比如按使用次数【[参考资料](/wiki/1.前端/JavaScript/Webpack/config/optimization_chunks)】
 * [css-extract](https://webpack.js.org/plugins/mini-css-extract-plugin/#install)
+* 对于react-router这类SPA项目来说，可以结合`import()`来做代码拆分并动态加载；
 
 
 ### CDN
