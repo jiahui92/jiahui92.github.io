@@ -8,9 +8,9 @@ tags:
 ## 安装jenkins.blueocean
 ```sh
 # 使用宿主机的docker（docker.sock），这样就不会在jenkins的docker里面再嵌套docker
-docker run -d --name jenkins-blueocean -p 8081:8080 -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home -u 0 jenkinsci/blueocean
+docker run -d --name jenkins-blueocean --env TZ=Asia/Shanghai -p 8081:8080 -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home -u 0 jenkinsci/blueocean
 ```
-替代更新源再安装插件: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/current/update-center.json
+进去`插件管理 > 高级`替代更新源再安装插件: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 
 ## pipeline
 [参考资料](https://www.w3cschool.cn/jenkins/jenkins-173a28n4.html)
@@ -35,9 +35,10 @@ pipeline {
         sh '''
 # when the container not exist, "|| true" can avoid the error 
 docker rm -f blog || true 
-docker run -d --name blog -p 4000:4000 -v ~/logs:/root/logs --restart always blog
+docker run -d --name blog -p 4000:4000 -v ~/logs:/root/logs --restart always --rm blog
 sleep 1
 docker logs blog
+sleep 5
 '''
       }
     }
