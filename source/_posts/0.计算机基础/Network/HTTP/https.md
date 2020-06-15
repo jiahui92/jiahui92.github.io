@@ -13,7 +13,7 @@ tags:
 
 ## SSL握手
 ![](/img/Snip20200304_14.png)
-【[参考资料](https://razeencheng.com/post/ssl-handshake-detail.html)】
+【[参考资料: wireshark抓包](https://razeencheng.com/post/ssl-handshake-detail.html)】
 * 每个https网站会提供一个数字证书，浏览器会确认该证书是托管在受信的第三方机构的且没有遭到篡改
 * 数字证书里包含有当前网站的域名和公钥
 * SSL握手阶段期间需要协商客户端和服务端都可用的加密方式
@@ -22,7 +22,7 @@ tags:
 
 
 ## 浏览器验证网站数字证书的流程
-上级颁发证书时，会用私钥加密下级的公钥生成数字签名，然后浏览器用其上级的公钥去解密该数字签名即可。这些上级的证书一般都是预存在浏览器内的。【[参考资料](https://blog.csdn.net/hejjiiee/article/details/53443357)】
+上级颁发证书时会用私钥加密该证书的散列值来生成数字签名，然后浏览器用其上级的公钥对该数字签名进行RSA解密并校验散列值。这些上级的证书一般都是预存在浏览器内的。【[参考资料](https://blog.csdn.net/hejjiiee/article/details/53443357)】
 ![](/img/Snip20200304_15.png)
 
 

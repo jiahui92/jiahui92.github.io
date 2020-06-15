@@ -29,7 +29,6 @@ acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club"
 
 ```nginx
 listen       443 ssl http2;
-listen       [::]:443 ssl http2;
 
 ssl_certificate "/xxx/fullchain.cer";
 ssl_certificate_key "/xxx/xxxx.key";
@@ -39,6 +38,7 @@ ssl_ciphers HIGH:!aNULL:!MD5;
 ssl_prefer_server_ciphers on;
 ```
 
+配置完毕后，使用[sslabs](https://www.ssllabs.com/ssltest)测试SSL健康情况
 
 ## nodejs中间证书的报错
 在不提供中间证书的情况下，浏览器会自行下载，但是某些情况下不支持自动下载的话，会报错，比如nodejs [Error: unable to verify the first certificate](https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs)  【[参考资料](https://blog.vimge.com/archives/other/ssl-fullchain.html)】
