@@ -38,7 +38,7 @@ tags:
 
 
 ## 插件开发
-所有的插件都只是为了返回一套serverless `config配置`；下面这个是tencent-express的插件依赖树
+所有的插件都只是为了返回一套serverless `config配置`，最后厂商通过这个配置来提供各种服务；下面这个是tencent-express的插件依赖树
 * [serverless-components/tencent-express](https://github.com/serverless-components/tencent-express/blob/master/src/index.js): 返回node&express相关配置
   * [@serverless/tencent-framework](https://github.com/serverless-components/tencent-framework/blob/master/src/index.js)
     * @serverless/tencent-scf-multi-region: 返回部署机房配置
