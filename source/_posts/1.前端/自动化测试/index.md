@@ -19,7 +19,7 @@ tags:
 
 # 工具
 * 单元测试: jest, mocha
-	* 代码覆盖率istanbul
+	* 代码覆盖率 istanbul
 * E2E: nightwatch, [cypress](https://github.com/cypress-io/cypress)
   * 快照/html对比
 * [vue-component](https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
@@ -29,7 +29,9 @@ tags:
 import { shallowMount } from '@vue/test-utils'
 import Foo from './Foo.vue'
 
+// 描述块
 describe('Foo', () => {
+  // 一个测试用例
   it('renders a message and responds correctly to user input', () => {
     const wrapper = shallowMount(Foo, {
       data() {
@@ -51,9 +53,70 @@ describe('Foo', () => {
 ```
 
 ## 自动化测试
-考虑在本地或CI过程中执行`npm run test`
+考虑在本地或CI过程中执行`npm run test` + watch
 
 
 
 
+# jest API
+## 异步
+```js
+it('test async', (done) => {
+  ajax(() => {
+    done();
+  })
+})
 
+it('test async', async() => {
+  await ajax();
+})
+```
+
+## 洋葱
+global.beforeAll -> describe.beforeAll --> global.afterAll
+```js
+beforeAll(() => {})
+afterAll(() => {})
+
+describe('test', () => {
+  let store = {};
+
+  beforeAll(() => {
+    store.a = 1;
+  })
+
+  beforeEach(() => {
+    store.b = 1;
+  })
+
+  it('t1', () => {
+    store.a++; // 1
+    store.b; // 1
+  })
+
+  it('t2', () => {
+    store.a; // 2
+    store.b; // 1
+  })
+})
+```
+
+## 代理
+* spyOn: 代理函数，可以测试函数被调用次数、返回值等
+  * jest.fn
+* mock: 模块
+
+```js
+import moduleName, {foo} from '../moduleName';
+
+jest.mock('../moduleName', () => {
+  return {
+    __esModule: true,
+    default: jest.fn(() => 42),
+    foo: jest.fn(() => 43),
+  };
+});
+
+moduleName(); // Will return 42
+foo(); // Will return 43
+```
