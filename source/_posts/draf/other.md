@@ -105,3 +105,12 @@ function imgLog(url) {
 * 只有一个项目 + webpack
 * 零散几个项目 + SPA脚手架 + webpack
 * 多个项目    + 微前端? + webpack-cli
+
+
+# mac app is damaged xxx
+* 方法一
+  * sudo spctl --master-disable
+* 方法二
+  * 打开终端，在终端中粘贴下面命令：“sudo xattr -r -d com.apple.quarantine” ,然后输入个空格，再将应用程序目录中的软件拖拽到命令后面，按回车后输入密码执行。比如： sudo xattr -r -d com.apple.quarantine /Applications/*.app
+
+
