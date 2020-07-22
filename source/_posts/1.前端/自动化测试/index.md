@@ -107,6 +107,18 @@ describe('test', () => {
 * mock: 模块
 
 ```js
+// mock接口返回值
+const { data } = await axios.get(url);
+
+// 以下是测试代码
+import axios from 'axios';
+jest.mock('axios')
+axios.get.mockReturnValue(Promise.resolve({
+  data: 'mock data'
+});
+```
+
+```js
 import moduleName, {foo} from '../moduleName';
 
 jest.mock('../moduleName', () => {
@@ -119,4 +131,70 @@ jest.mock('../moduleName', () => {
 
 moduleName(); // Will return 42
 foo(); // Will return 43
+```
+
+## jest.config.js
+[文档](https://jestjs.io/docs/en/configuration)
+```js
+module.exports = {
+  // 寻找入口文件
+  roots: ['/src', /*'<rootDir>/src'*/],
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$', // 文件路径匹配（默认值）
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'] // 后缀自动补全
+
+  // 依赖处理
+  moduleNameMapper: {
+    '\\.(jpg|jpeg)$': '/jest/mock/imageStub.js',
+    '@axios': ['./src/axios'], // 别名路径
+  }
+
+  // 编译
+  transform: {
+    '\\.tsx?$': '/node_modules/ts-jest',
+    // 自定义编译
+    '\\.jsx?$': '/jest/transform/myJsxTransform.js',
+  }
+
+  globals: {
+    '__DEV__': true,
+    'ts-jest': {
+      // 提供给ts-jest的编译配置
+      tsConfig: '/jest/tsconfig.test.json',
+    }
+  }
+
+
+  // 覆盖率相关
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx}"
+  ],
+  coverageDirectory: '/jest/coverage',
+  coverageThreshold: {}, // 覆盖率阀值，低于时警告
+
+
+  // 快照
+  // snapshot
+
+
+  // jest 缓存
+  cacheDirectory: '/jest/tmp/cache',
+
+  // watch
+  watchPlugins: ['path/to/yourWatchPlugin'],
+  watchPathIgnorePatterns,
+
+}
+```
+
+## CLI
+```sh
+jest my.test.js
+jest --watch my.test.js
+
+# run git uncommitted file
+jest -o
+jest --watch # default with -o
+
+jest --collect-coverage
 ```
