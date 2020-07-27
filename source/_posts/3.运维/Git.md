@@ -32,10 +32,40 @@ git config增加配置
 
 
 ## 命令
+
+### rebase
+```sh
+# 暂存dev的代码
+git stash
+
+# 更新master代码
+git checkout master
+git pull
+
+git rebase dev
+
+git checkout dev
+git commit -m 'xxx'
+```
+
+### 合并
+```sh
+git fetch
+git merge xxx
+```
+
+
+### 回滚
 ```sh
 # 丢弃变更
 git checkout .
 git reset --hard HASH
+```
+
+### 其他
+```sh
+# 删除分支
+git branch -D xxx
 ```
 
 ## Gitlab
