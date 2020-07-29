@@ -42,16 +42,23 @@ git stash
 git checkout master
 git pull
 
-git rebase dev
-
 git checkout dev
-git commit -m 'xxx'
+git rebase master
+
+git push
 ```
 
-### 合并
+### merge
 ```sh
 git fetch
 git merge xxx
+```
+
+
+### 切远程分支
+```sh
+git branch -a # 查看所有分支
+git checkout -b newDev origin/newDev
 ```
 
 
