@@ -66,7 +66,10 @@ git checkout -b newDev origin/newDev
 ```sh
 # 丢弃变更
 git checkout .
-git reset --hard HASH
+git reset --hard 86312f5 # 回退到某个commit，之后的commit将会丢失
+git reset --soft 86312f5 # 回退到某个commit并将回退的代码放在暂存区
+
+git revert 86312f5 # 回退到某个commit，相比reset会产生一个新的commit
 ```
 
 ### 其他
