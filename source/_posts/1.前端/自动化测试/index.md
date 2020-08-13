@@ -107,6 +107,11 @@ describe('test', () => {
 * mock: 模块
 
 ```js
+// https://stackoverflow.com/questions/29719631/how-do-i-set-a-mock-date-in-jest
+Date.now = jest.fn(() => 1487076708000);
+```
+
+```js
 // mock接口返回值
 const { data } = await axios.get(url);
 
