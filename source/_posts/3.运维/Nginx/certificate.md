@@ -11,10 +11,20 @@ tags:
 * [其它域名管理商的密钥环境设置](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
 ```sh
 # 腾讯域名操作密钥
-export DP_Id="160111"
-export DP_Key="a000eeacxxxxa7fbf41xxxxxxxx"
+export DP_Id="160830"
+export DP_Key="a000eeacb7a7fbf41ae53afaa04bd9a9"
+
 # 泛域名 注意要用双引号圈住，不然可能会报错
-acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club"
+# 每60天acme.sh会自动更新证书
+# 设置--renew-hook来更新完毕后自动重载nginx证书缓存
+acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club" --renew-hook "nginx -t && nginx -s reload"
+
+# 查看下次更新时间
+acme.sh --list
+
+# 手动更新证书
+acme.sh --renew-all --force
+nginx -t && nginx -s reload
 ```
 
 证书生成完毕后，会在目录下看到这几个文件
@@ -39,6 +49,7 @@ ssl_prefer_server_ciphers on;
 ```
 
 配置完毕后，使用[sslabs](https://www.ssllabs.com/ssltest)测试SSL健康情况
+
 
 ## nodejs中间证书的报错
 在不提供中间证书的情况下，浏览器会自行下载，但是某些情况下不支持自动下载的话，会报错，比如nodejs [Error: unable to verify the first certificate](https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs)  【[参考资料](https://blog.vimge.com/archives/other/ssl-fullchain.html)】
