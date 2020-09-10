@@ -24,9 +24,9 @@ tags:
 # 先行搜索
 继续匹配但不捕捉为结果，只是判断一下
 `(pattern)` 对匹配结果进行分组
-`(?=pattern)` 继续匹配看是否符合pattern
-`(?!pattern)` 继续匹配看是否不符合pattern
-`(?:pattern)` 继续匹配并丢弃匹配到的结果
+`(?=pattern)` 符合pattern则继续匹配
+`(?!pattern)` 不符合pattern则继续匹配
+`(?:pattern)` 丢弃匹配到的结果并继续匹配
 
 ![](/img/Snip20200330_1.png)
 
@@ -42,6 +42,14 @@ tags:
 // "123456" ==> "123,456"
 // "1234567" ==> "1,234,567"
 "1234567".replace(/(?!^)(?=(\d{3})+$)/g, ",$&");
+
+// "1123.11" ==> "1,123.11"
+function format (num) {
+  const arr = num.toString().split('.');
+  arr[0] = arr[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  return arr.join('.');
+}
+
 ```
 
 
