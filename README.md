@@ -16,19 +16,29 @@
   * [ ] h5
   * [ ] 目录转xmind
   * [ ] 增加order字段
-* xmind
-  * Vue.i18
-  * Lib小库
-  * Webpack.xmind
-  * Vue.xmind
-  * js.xmind
-  * html5.xmind
-  * three.js.xmind
-  * 编写可维护的js.xmind
-  * 《深入浅出Node.js》.xmind
-  * 算法.xmind
-  * AI.xmind
-  * draf/*.md
+
+## xmind待整理
+* [x] HTML
+* [x] CSS
+* [ ] JavaScript.xmind
+* [x] 性能优化
+* [x] Webpack.xmind
+* [ ] 框架&源码
+  * [x] 浏览器
+  * [x] React
+  * [ ] Vue
+  * [x] AST
+  * [ ] Lib小库
+  * [x] 插件
+* [x] 自动化测试
+* [x] 跨平台
+* [ ] three.js.xmind
+* [ ] 编写可维护的js.xmind
+* [ ] 深入浅出Node.xmind
+* [ ] 算法.xmind
+* [ ] AI.xmind
+* [ ] draf/*.md
+
 
 
 ## dev
