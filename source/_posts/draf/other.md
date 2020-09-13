@@ -6,56 +6,6 @@ date: 2020-04-27 00:00:10
 tags:
 ---
 
-# img跨域打点
-[参考资料](https://blog.csdn.net/FuDesign2008/article/details/6772108)
-```js
-// 打点
-export default function log(_event = '', data = {}) {
-  const obj = {
-    _event,
-    _userId,
-    _appName,
-    ...data,
-  };
-
-  const arr = [];
-
-  for (const k in obj) {
-    let v = obj[k];
-    if (typeof v === 'undefined') v = '';
-    if (typeof v === 'object') v = JSON.stringify(v);
-    v = encodeURIComponent(v);
-    arr.push(k + '=' + v);
-  }
-
-  const url = 'https://api.guangjun.club/logger/log?' + arr.join('&');
-  imgLog(url);
-}
-
-
-let i = 0;
-const time = `${(new Date()).getTime()}-`;
-
-function imgLog(url) {
-  // 全局变量防止Image被回收导致请求失败
-  const data = window.imgLogData || (window.imgLogData = {}); 
-  let img = new Image();
-  const uid = time + i++; // 生成唯一id用于阻止缓存请求
-  img.onload = img.onerror = () => {
-    img.onload = img.onerror = null;
-    img = null;
-    delete data[uid];
-  };
-  img.src = url + '&_nocache=' + uid; // 及时存在临时变量，某些浏览器也会立即回收
-}
-
-```
-
-## beacon
-[参考资料](https://www.barretlee.com/blog/2016/02/20/navigator-beacon-api/)
-* 未来可以切换到[beacon](https://zhuanlan.zhihu.com/p/41759633)，但网上说有bug；
-* 相比img打点，beacon可以在后台进程里打点，意味着切换页面不会丢失打点请求；
-
 
 # seo
 * 百度、谷歌 SEO工具
@@ -113,4 +63,17 @@ function imgLog(url) {
 * 方法二
   * 打开终端，在终端中粘贴下面命令：“sudo xattr -r -d com.apple.quarantine” ,然后输入个空格，再将应用程序目录中的软件拖拽到命令后面，按回车后输入密码执行。比如： sudo xattr -r -d com.apple.quarantine /Applications/*.app
 
+
+# 微前端
+[参考资料](https://juejin.im/post/6844904182814605325)
+
+[Module Federation](https://juejin.im/post/6844904169405415432)
+
+[Module Dederation 2](https://mp.weixin.qq.com/s/sdIVsfmRlhDtT6DF2dmsJQ)
+
+多个项目需要同步修改webpack之类的配置文件
+* 抽npm包不太行，还是需要同步修改版本号
+  * 微前端可能是个解决方案
+    * 怎么结合docker.volumn来只打包必要的打包呢？
+      * 同时还要支持多个类型：pc, h5 , taro
 
