@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /wiki/
 Allow: /archives/
 Allow: /about/
 Disallow: /hidden/
