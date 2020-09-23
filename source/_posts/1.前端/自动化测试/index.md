@@ -109,6 +109,11 @@ describe('test', () => {
 ```js
 // https://stackoverflow.com/questions/29719631/how-do-i-set-a-mock-date-in-jest
 Date.now = jest.fn(() => 1487076708000);
+
+
+// mock es6 module function
+import * as utils from './utils';
+utils.someFn = jest.fn(() => 1);
 ```
 
 ```js
@@ -136,6 +141,10 @@ jest.mock('../moduleName', () => {
 
 moduleName(); // Will return 42
 foo(); // Will return 43
+```
+
+```js
+// mock es6 class: https://jestjs.io/docs/en/es6-class-mocks
 ```
 
 ## jest.config.js
