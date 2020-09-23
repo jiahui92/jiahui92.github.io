@@ -131,6 +131,8 @@ axios.get.mockReturnValue(Promise.resolve({
 ```js
 import moduleName, {foo} from '../moduleName';
 
+// 内部的函数调用也会被mock
+// 但是当mock和需调用的函数都在一个模块时，需要将两个函数拆成两个模块
 jest.mock('../moduleName', () => {
   return {
     __esModule: true,
