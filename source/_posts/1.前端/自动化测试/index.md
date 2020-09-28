@@ -15,6 +15,30 @@ tags:
   * 注意要考虑测试代码的可维护性，可以只比较部分的对象值；假如一整个对象都得一模一样，一旦改变了返回值，测试代码都得一起改，这个成本不一定愿意承担；所以一种平衡的办法是只测试里面重要的值，对于组件测试来说就是只测试里面重要的属性/UI；甚至将拼接的文案拆开返回，只测试其中重要的值，比如`价格：¥19.1`，只测试`19.1`；
   * 相比直接测API的返回值，也可以考虑测得更细一点，比如某个function；这样报错时容易定位错误，但测试用例可能会变得有点业务无关。
 
+# 测试用例的评估
+## 排列组合
+可以对传进来的参数使用排列组合的来将所有可测用例枚举出来，最后再结合业务排除掉不可能的
+```js
+// a,b,c都只可能为无值或者有值这两种情况，那么排列组合的情况是2*2*2=6
+function (a, b, c) {}
+```
+
+## 分支语句
+每一个分支一个用例，最后再结合所有分支测一下
+```js
+// 用例分别为 a分支 、 b分支 、 a+b
+function xxx () {
+  if (a) {
+    xxx;
+  }
+
+  if (b) {
+    xxx
+  }
+
+  return xxx;
+}
+```
 
 
 # 工具
@@ -78,6 +102,7 @@ global.beforeAll -> describe.beforeAll --> global.afterAll
 beforeAll(() => {})
 afterAll(() => {})
 
+
 describe('test', () => {
   let store = {};
 
@@ -89,6 +114,7 @@ describe('test', () => {
     store.b = 1;
   })
 
+  // it语句是可以并行跑的
   it('t1', () => {
     store.a++; // 1
     store.b; // 1
@@ -127,27 +153,24 @@ axios.get.mockReturnValue(Promise.resolve({
   data: 'mock data'
 });
 ```
-
+### 当mock的函数与测试函数在同一模块时
+* 第一种办法是拆开为两个模块
+* 第二种是巧妙使用requireActual【[参考资料](https://spectrum.chat/testingjavascript/help/mocking-implementation-from-the-same-module-thats-being-tested~e8103950-e198-423d-a9ad-5b308853b2ac)】
 ```js
-import moduleName, {foo} from '../moduleName';
+import { foo } from '../moduleName';
 
-// 内部的函数调用也会被mock
-// 但是当mock和需调用的函数都在一个模块时，需要将两个函数拆成两个模块
+// 直接使用mock会导致module的所有函数都会被mock
 jest.mock('../moduleName', () => {
   return {
-    __esModule: true,
-    default: jest.fn(() => 42),
+    // 注意这里!!!!
+    ...requireActual('../moduleName'),
     foo: jest.fn(() => 43),
   };
 });
 
-moduleName(); // Will return 42
 foo(); // Will return 43
 ```
 
-```js
-// mock es6 class: https://jestjs.io/docs/en/es6-class-mocks
-```
 
 ## jest.config.js
 [文档](https://jestjs.io/docs/en/configuration)
