@@ -155,7 +155,7 @@ axios.get.mockReturnValue(Promise.resolve({
 ```
 ### 当mock的函数与测试函数在同一模块时
 * 第一种办法是拆开为两个模块
-* 第二种是巧妙使用requireActual【[参考资料](https://spectrum.chat/testingjavascript/help/mocking-implementation-from-the-same-module-thats-being-tested~e8103950-e198-423d-a9ad-5b308853b2ac)】
+* 第二种是巧妙使用requireActual（当被测函数与需要mock的函数为一个模块时，这种办法好像不行）【[参考资料](https://spectrum.chat/testingjavascript/help/mocking-implementation-from-the-same-module-thats-being-tested~e8103950-e198-423d-a9ad-5b308853b2ac)】
 ```js
 import { foo } from '../moduleName';
 
