@@ -23,6 +23,15 @@ tags:
   * / 下一个
   * ? 上一个
 
+```sh
+# 输入中文乱码
+vim ~/.vimrc
+
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+```
+
 
 ## yum
 * yum install -y epel-release
@@ -117,3 +126,24 @@ shutdown +30 # 30min后关机
 shutdown -r +30 '升级系统，30分钟后重启' # 附加通知信息
 shutdown -c '取消关机'  # 取消关机
 ```
+
+
+## crontab
+```sh
+# 进入编辑文件
+crontab -e
+
+  # 周一到周五 下午6点
+  # 将mail转成标准输出
+  0 18 * * 1,5 sh ~/crontab/robot.sh >/dev/null 2>&1
+
+# 查看日志
+tail /var/log/cron
+tail /var/log/maillog
+# 查看邮件
+mail
+```
+
+需注意
+* shell脚本有执行权限`chmod +x xxx.sh`
+* [关于MAIL报错](https://blog.csdn.net/toopoo/article/details/104979615)
