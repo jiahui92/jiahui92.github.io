@@ -135,7 +135,7 @@ crontab -e
 
   # 周一到周五 下午6点
   # 将mail转成标准输出
-  0 18 * * 1,5 sh ~/crontab/robot.sh >/dev/null 2>&1
+  0 18 * * 1-5 sh ~/crontab/robot.sh >/dev/null 2>&1
 
 # 查看日志
 tail /var/log/cron
@@ -144,6 +144,23 @@ tail /var/log/maillog
 mail
 ```
 
-需注意
+### 定时格式
+【[参考资料](https://www.runoob.com/linux/linux-comm-crontab.html)】
+```sh
+*    *    *    *    *
+-    -    -    -    -
+|    |    |    |    |
+|    |    |    |    +----- 星期中星期几 (0 - 7) (星期天 为0)
+|    |    |    +---------- 月份 (1 - 12) 
+|    |    +--------------- 一个月中的第几天 (1 - 31)
+|    +-------------------- 小时 (0 - 23)
++------------------------- 分钟 (0 - 59)
+
+
+# 每两小时执行一次
+00 */2 * * *
+```
+
+### 其他
 * shell脚本有执行权限`chmod +x xxx.sh`
 * [关于MAIL报错](https://blog.csdn.net/toopoo/article/details/104979615)
