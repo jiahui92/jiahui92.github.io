@@ -44,6 +44,17 @@ set encoding=utf-8
 * apt, apt-get, brew, npm, mvn, pip
 * wget, tar, rpm -i
 
+### apt
+debian&ubuntu使用的是apt包管理器
+```sh
+## 更新为淘宝源
+sudo sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+## 更新下载源地址sourcelist和版本
+sudo apt update
+## 安装npm
+sudo apt install npm
+``` 
+
 
 ## tmux
 【[参考资料](https://www.cnblogs.com/kaiye/p/6275207.html)】
@@ -164,3 +175,4 @@ mail
 ### 其他
 * shell脚本有执行权限`chmod +x xxx.sh`
 * [关于MAIL报错](https://blog.csdn.net/toopoo/article/details/104979615)
+
