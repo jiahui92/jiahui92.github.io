@@ -7,9 +7,19 @@ tags:
 
 
 # 类型
-## 类型推断
-* 一层一层推断
-* 通过toObject直接转成定义好的struct
+## 类型推断 与 取值
+### 
+```go
+// 一层一层推断
+list := res["data"].([]interface{})
+item := list[0].(map[string]interface{})
+user := item["user"].(map[string]interface{})
+userName := user["name"].(map[string]interface{})
+
+// 通过toObject直接转成定义好的struct
+// https://stackoverflow.com/questions/63328016/how-to-retrieve-a-nested-json-value-in-a-top-level-struct-in-golang
+
+```
 ## json
 
 
@@ -46,7 +56,7 @@ func main() {
 
 # vscode的配置
 ## gopls
-xxx
+语法提示 、 rename 、 autoimport
 
 ## delve
 默认的dlv插件配置不好用，需要手动配置一下【[参考资料](https://itnext.io/golang-bits-better-debugging-in-vscode-599bc5b018da)】
