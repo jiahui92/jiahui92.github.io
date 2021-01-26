@@ -72,6 +72,24 @@ git reset --soft 86312f5 # 回退到某个commit并将回退的代码放在暂�
 git revert 86312f5 # 回退到某个commit，相比reset会产生一个新的commit
 ```
 
+### stash
+```sh
+git stash
+git stash pop
+
+
+git stash list
+git stash apply 1
+git stash pop 1
+git stash drop 1
+```
+
+#### 恢复drop stash
+```sh
+git fsck --unreachable | grep commit
+git show -q commit1 commit2 commit3
+```
+
 ### 其他
 ```sh
 # 删除分支
