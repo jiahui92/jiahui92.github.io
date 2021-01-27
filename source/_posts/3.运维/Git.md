@@ -74,7 +74,7 @@ git revert 86312f5 # 回退到某个commit，相比reset会产生一个新的com
 
 ### stash
 ```sh
-git stash
+git stash push -u -m "some msg"
 git stash pop
 
 
