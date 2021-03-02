@@ -44,9 +44,6 @@ function xxx () {
 # 工具
 * 单元测试: jest, mocha
 	* 代码覆盖率 istanbul
-* E2E: nightwatch, [cypress](https://github.com/cypress-io/cypress)
-  * 快照/html对比
-* [vue-component](https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
 
 ```js
 // vue组件测试
@@ -237,3 +234,5 @@ jest --watch # default with -o
 
 jest --collect-coverage
 ```
+
+
