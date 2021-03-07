@@ -155,3 +155,10 @@ proxychains4 curl cip.cc # 此时会输出config文件的路径，通过vim来�
 cat /etc/resolv.conf
 # nameserver xx.xx.xx.xx
 ```
+
+## shadowsock
+### PAC rule
+```
+||proxy.com^
+@@unproxy.com^
+```
