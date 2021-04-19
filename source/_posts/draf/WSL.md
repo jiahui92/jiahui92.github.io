@@ -10,7 +10,7 @@ tags:
 xxx
 
 ## 问题
-### 连接不上
+### 连接不上WSL
 * [永久解决：使用NoLsp.exe设置](https://github.com/microsoft/WSL/issues/4177)
 * 临时解决
 ```sh
@@ -34,3 +34,14 @@ swap=8GB                # How much swap space to add to the WSL2 VM. 0 for no sw
 
 ### ip不固定
 xxx
+
+
+### 接口 CONNECTION_REFUSED
+curl尝试是否能通
+
+* 重启wsl
+* 将`localhost:3000`替换为`127.0.0.1:3000`或`[::1]:3000`
+* 更换端口
+* 防火墙
+
+* 调试工具？可以查看中间链路哪里出错了
