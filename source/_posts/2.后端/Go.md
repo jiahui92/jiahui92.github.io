@@ -20,6 +20,13 @@ userName := user["name"].(map[string]interface{})
 // https://stackoverflow.com/questions/63328016/how-to-retrieve-a-nested-json-value-in-a-top-level-struct-in-golang
 
 ```
+
+### nil的判断
+https://mangatmodi.medium.com/go-check-nil-interface-the-right-way-d142776edef1
+```go
+val == nil || reflect.ValueOf(val).IsNil()
+```
+
 ## json
 
 
