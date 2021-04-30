@@ -37,7 +37,7 @@ autorun('loggerzz', r => {
 ```
 
 # 优化
-mobx监听到值变更后，会调用React的`this.forceUpdate()，所以在同时发生多个变更时，使用runInAction来减少更新次数
+mobx监听到值变更后，会调用React的`this.forceUpdate()`，所以在同时发生多个变更时，使用`runInAction`来减少更新次数
 ```js
 runInAction(() => {
   this.myProp1 = 1;
