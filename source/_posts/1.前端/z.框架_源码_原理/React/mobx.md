@@ -15,7 +15,7 @@ import { spy } from 'mobx';
 
 spy((event) => {
   // spy能值被修改后监听到，从而知道myProps在哪里被修改了
-  if ((event.key || '').includes(/myProp/i)) {
+  if ((event.key || '').includes("myProp")) {
     debugger;
   }
 })
