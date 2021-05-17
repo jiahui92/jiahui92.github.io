@@ -133,7 +133,10 @@ proxy
 curl cip.cc
 ```
 
-#### proxychain
+#### proxifier
+win10下没有`proxychains`，但可以用`proxifier`软件，可以代理任何程序
+
+#### proxychains
 * [安装](https://www.harker.cn/archives/proxychains.html)
 * [在mac下无效的解决办法](https://zhuanlan.zhihu.com/p/21281236)： 关闭SIP（System Intergrity Protection）系统完整性保护
 ```sh
