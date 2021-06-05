@@ -54,12 +54,38 @@ func main() {
 
 
 # go cli
-* go install / get
-  * bin pkg 目录
-* go modules
-* go package
-* go list
-* go vender
+## 目录
+* bin/pkg：存放go依赖文件的目录
+* src：本地开发代码存放目录
+  * vender: 开发项目的目录，在该目录下查到到依赖时，则不会再去找bin/pkg
+  * go.mod文件中定义依赖
+
+## 安装依赖
+### go get
+`go get` 安装依赖（下载、编译、安装到对应目录）
+```sh
+  go get -u github.com/golang/protobuf@v1.4.0
+```
+* go build 编译生成可执行文件
+* go install 将编译后的可执行文件安装到指定bin/pkg目录
+* go run 编译并运行程序
+
+### vender
+`go mod vender`将本地的包`$GOPATH/pkg/mod`安装进开发项目的vender依赖
+
+
+## modules开发
+```sh
+mkdir src/hello
+cd src/hello
+## 初始化go模块
+go mod init github.com/jiahui/hello
+go run hello.go
+
+## 使用go modules
+go get
+go mod vender
+```
 
 # vscode的配置
 ## gopls
