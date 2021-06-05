@@ -36,7 +36,7 @@ git config增加配置
 ### rebase
 ```sh
 # 简单的一句话执行完
-git pull --rebase origin master
+git pull --rebase origin master --autostash
 ```
 ```sh
 # 暂存dev的代码
