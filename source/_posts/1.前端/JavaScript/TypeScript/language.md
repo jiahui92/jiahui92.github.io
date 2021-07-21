@@ -5,10 +5,6 @@ date: 2020-11-15 00:00:03
 tags:
 ---
 
-# TODO
-* TS的内置基础类型: Omit之类的【[参考资料](https://juejin.cn/post/6844904066489778183)】
-  
-
 # 基础类型关键字
 * number, string, boolean
 * any, void, never ( null, undefined )
