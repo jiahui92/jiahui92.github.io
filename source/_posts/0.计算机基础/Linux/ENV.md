@@ -36,10 +36,10 @@ tags:
 【[参考资料](https://www.jianshu.com/p/ac2bc0ad3d74)】
 * 对所有用户有效: /etc/profile
 * 对当前用户有效: 
-	* ~/.bashrc
-	* ~/.zshrc
-	* ~/.bash_profile
-	* 修改完毕后需要执行"source ~/.bashrc"更新配置
+	* `~/.zshrc`
+	* `~/.bashrc` 或 `~/.bash_profile`
+	* 修改完毕后需要执行`source ~/.bashrc`更新配置
+  	* 如果是zsh，可以在`~/.zshrc`中加入`source ~/.bashrc`，这样每次启动命令行都会自动执行
 
 ```sh
 vim ~/.bashrc
