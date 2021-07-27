@@ -88,10 +88,15 @@ git stash pop 1
 git stash drop 1
 ```
 
-#### 恢复drop stash
+#### 恢复误删的commit
 ```sh
-git fsck --unreachable | grep commit
+# 查看已删除的commit（包括git stash drop, git reset --hard）
+# git fsck --unreachable | grep commit
+git reflog
+# 查看commit1, commit2, commit3的详细内容
 git show -q commit1 commit2 commit3
+# 恢复commit
+git merge commit1
 ```
 
 ### 其他
