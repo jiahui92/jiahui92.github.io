@@ -124,6 +124,42 @@ describe('test', () => {
 })
 ```
 
+## expect API
+```js
+describe('test', () => {
+  // 全部相等
+  expect({a: 1, b: 1}).toEqual({a: 1, b: 1});
+
+  // 部分相等即可
+  expect({
+    key: 'key1',
+    value: 'value1',
+    children: [{
+      key: 'childrenKey1',
+      title: 'xxx',
+    }]
+  }).toEqual(expect.objectContaining({
+    key: 'key1',
+    children: [
+      expect.objectContaining({
+        key: 'childrenKey1',
+      })
+    ]
+  }));
+})
+
+// 数组包含某个对象
+const users = [{id: 1, name: 'Hugo'}, {id: 2, name: 'Francesco'}];
+test('we should have ids 1 and 2', () => {
+  expect(users).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({id: 1}),
+      expect.objectContaining({id: 2})
+    ])
+  );
+});
+```
+
 ## 代理
 * spyOn: 代理函数，可以测试函数被调用次数、返回值等
   * jest.fn
