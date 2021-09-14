@@ -11,13 +11,25 @@ tags:
 ### 
 ```go
 // 一层一层推断
-list := res["data"].([]interface{})
-item := list[0].(map[string]interface{})
-user := item["user"].(map[string]interface{})
-userName := user["name"].(map[string]interface{})
+// 方式一： interface{}的取值与推断
+var userName = ""
+if list, ok1 := res["data"].([]interface{}); ok1 {
+   if item, ok2 := list[0].(map[string]interface{}); ok2 {
+      if modifiedUser, ok3 := item["modifiedUser"].(map[string]interface{}); ok3 {
+         userName = modifiedUser["name"].(string)
+      }
+   }
+}
 
 // 通过toObject直接转成定义好的struct
 // https://stackoverflow.com/questions/63328016/how-to-retrieve-a-nested-json-value-in-a-top-level-struct-in-golang
+// 方式二： 使用ToObject转成struct
+var list []gen_ei.IAsset
+utils.ToObject(res["data"], &list)
+var userName = ""
+if len(list) > 0 && list[0].ModifiedUser != nil {
+   userName = assets[0].ModifiedUser.Name
+}
 
 ```
 
