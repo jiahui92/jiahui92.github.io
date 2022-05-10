@@ -161,7 +161,8 @@ cat /etc/resolv.conf
 
 ## shadowsock
 ### PAC rule
+修改pac.txt文件里的rules数组变量，实时生效
 ```
-||proxy.com^
+||.proxy.com^
 @@unproxy.com^
 ```
