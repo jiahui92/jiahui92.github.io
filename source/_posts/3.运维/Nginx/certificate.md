@@ -17,10 +17,16 @@ export DP_Key="a000eeacb7a7fbf41ae53afaa04bd9a9"
 # 泛域名 注意要用双引号圈住，不然可能会报错
 # 每60天acme.sh会自动更新证书
 # 设置--renew-hook来更新完毕后自动重载nginx证书缓存
-acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club" --renew-hook "nginx -t && nginx -s reload"
+# dnssleep 减少dns check的检查时间(超时则默认成功，避免使用google dns导致的失败) https://www.xinac.net/9206.html
+acme.sh --issue --dns dns_dp -d guangjun.club -d "*.guangjun.club" --renew-hook "nginx -t && nginx -s reload" --dnssleep 30
 
 # 查看下次更新时间
 acme.sh --list
+# 查看定时检查过期的任务是否已经添加成功
+acme.sh --cron
+# 强行执行一次定时任务
+acme.sh --cron -f
+
 
 # 手动更新证书
 acme.sh --renew-all --force
