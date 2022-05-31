@@ -34,10 +34,22 @@ if len(list) > 0 && list[0].ModifiedUser != nil {
 ```
 
 ### nil的判断
+空struct的nil判断比较特别，类型不等于nil
 https://mangatmodi.medium.com/go-check-nil-interface-the-right-way-d142776edef1
 ```go
 val == nil || reflect.ValueOf(val).IsNil()
 ```
+
+## 数组与slice
+正常情况下直接用slice就行了
+* 数组是固定长度的，slice长度可变；
+* 作为参数传递时，数组会传递值，slice会传递指针
+```go
+// 数组的声明
+a1 := [3]int{1,2,3}
+a2 := [...]int{1,2,3}
+```
+
 
 ## json
 
