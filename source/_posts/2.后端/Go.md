@@ -111,6 +111,20 @@ go get
 go mod vender
 ```
 
+# go热更新
+使用[air](https://github.com/cosmtrek/air)启动项目支持类似前端的热重载本地更新的代码(go version > 1.16)
+```sh
+# 安装方式一：推荐翻墙后使用这个安装
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+# 安装方式二：这个方式安装下来的可能会启动不了，比如air -v不会输出版本号
+go install github.com/cosmtrek/air@latest
+# 测试一下air，看下是否输出了版本号
+air verison
+
+# ulimit在linux下用于更改监听的文件最大数量(window不需要)
+ulimit -n 10000 && air -- --your-go-params=xxx
+```
+
 # vscode的配置
 ## gopls
 语法提示 、 rename 、 autoimport
