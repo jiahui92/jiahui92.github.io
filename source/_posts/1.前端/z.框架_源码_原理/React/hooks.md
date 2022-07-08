@@ -4,6 +4,12 @@ toc: true
 date: 2020-03-07 00:00:02
 ---
 
+
+* useEffect第二个参数不传
+* fiber
+* useMemo例子
+
+
 ## Hooks
 React16.8 为函数式提供可能并移除class【[参考资料](https://juejin.im/post/5d478b2d518825673a6ae1b9)】
 * class的缺点
