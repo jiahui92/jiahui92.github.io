@@ -88,6 +88,8 @@ git stash list
 git stash apply 1
 git stash pop 1
 git stash drop 1
+
+git show stash@{0}
 ```
 
 #### 恢复误删的commit
