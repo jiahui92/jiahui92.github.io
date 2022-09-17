@@ -55,3 +55,19 @@ resolve: {
   ...
 }
 ```
+
+### tsconfig-paths-webpack-plugin
+有些ts插件也会有mainFields的配置（比如[tsconfig-paths-webpack-plugin](https://github.com/dividab/tsconfig-paths-webpack-plugin)），最好是保持和webpack的resolve.mainFields保持一致，否则会造成部分依赖包的依赖包没有按照预期进行打包，比如包A引用了B；webpack在打包A时，用的是main入口的代码，而打包B时则用了module入口的代码；
+```js
+{
+  resolve: {
+    mainFields: ['module', 'main'],
+    plugins[
+      new TsconfigPaths({
+        configFile: 'tsconfig.json',
+        mainFields: ['module', 'main'],
+      })
+    ]
+  }
+}
+```
