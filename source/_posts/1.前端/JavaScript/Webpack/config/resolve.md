@@ -20,6 +20,7 @@ tags:
     extension: ['.js']
   },
 
+  // 只会对当前项目的包生效，貌似不会对node_modules里的无效
   alias: {
     utils: path.resolve('src/utils'),
   }，
@@ -36,7 +37,7 @@ tags:
 ```
 
 ## mainFields
-webpack会尝试使用`mainField`里的值在`package.json`中查找入口文件字段；【[官方文档](https://webpack.docschina.org/configuration/resolve/#resolve-mainfields)】【[参考资料](https://juejin.im/post/5cfe6d3be51d454d544abf30)】
+webpack会尝试使用`mainField`里的值在`package.json`中查找node_moduels包的入口文件字段；【[官方文档](https://webpack.docschina.org/configuration/resolve/#resolve-mainfields)】【[参考资料](https://juejin.im/post/5cfe6d3be51d454d544abf30)】
 ```js
 resolve: {
   // webpack的"target:web"对应的 mainFields
@@ -49,8 +50,8 @@ resolve: {
 {
   ...
   "main": "/lib/index.js", // browser和nodejs的入口文件
-  "module": "/lib/index.mjs", // ES Module: import
-  "browser": "/lib/index.browser.js", // browser的入口文件
+  "module": "/es/index.mjs", // ES Module: import
+  "browser": "/browser/index.js", // browser的入口文件
   ...
 }
 ```
