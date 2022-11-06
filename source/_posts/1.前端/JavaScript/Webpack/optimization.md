@@ -72,7 +72,7 @@ webpack --optimize--minimize
 ### 调试
 * [webpack4 ProfilingPlugin](https://webpack.js.org/plugins/profiling-plugin/)
 * [cpuprofile-webpack-plugin](https://github.com/jantimon/cpuprofile-webpack-plugin)
-  * [实例：基于nodejs的inspect-api以及服务器cpu-profile采集](http://www.codebaoku.com/it-js/it-js-266100.html)
+  * [实例：基于nodejs的"node --prof"日志以及服务器cpu-profile采集](http://www.codebaoku.com/it-js/it-js-266100.html)
 * [speed-measure-webpack-plugin](https://github.com/stephencookdev/speed-measure-webpack-plugin)
 
 
