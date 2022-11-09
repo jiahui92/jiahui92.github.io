@@ -37,8 +37,101 @@ x
 
 # 装饰器
 对标继承的模式（静态），装饰器可以动态给类添加功能；避免了一个实例继承了所有功能（臃肿）；
+
+## 例子
+```java
+class Shape {
+  draw() {
+    console.log('shape');
+  }
+}
+
+// 迭代：增加了一个红框
+```
+
+1. xxx
+```java
+class Shape {
+  draw() {
+    console.log('shape');
+    console.log('red border');
+  }
+}
+
+// 问题：这部分是公共代码，会影响别的业务
+```
+
+2. extend
+```java
+class RedBorderShape extends Shape {
+  draw() {
+    super.draw();
+    console.log('red border');
+  }
+
+  otherExtendApi();
+}
+
+const shape = new RedBorderShape();
+shape.draw();
+
+// 问题：以后还可能增加别的样式需求，并且每个业务所需有重合也有不同的地方
+// A,B,C
+// 继承组合会有很多类： AC, BC, ACBC
+// 装饰器随便组：A(B(C))
+```
+
+3. 装饰器
+```java
+class RedBorderDecorate {
+  constrouct(Shape shape) {
+    this.shape = shape;
+  }
+
+  draw() {
+    this.shape.draw();
+    console.log('red border');
+  }
+}
+
+const shape = new RedBorderDecorate(new Shape());
+shape.draw();
+
+// 问题：有多个装饰器，并且都是增强同一个功能时，可能因为会嵌套比较深，导致调试困难
+```
+
 ## 场景
-* 注入@controller\tabApi
-* ts?
-## 问题
-* 抽象类
+* `@contextProvider(TabApiConsumer, 'tabApi')`
+* `@autobind`
+* `@observer`
+<!-- * ts? -->
+
+## 原理
+[参考](https://blog.csdn.net/youlinhuanyan/article/details/108295701)
+* 编译插件
+  * class
+  * class属性
+* 装饰器实现
+```js
+// 编译前
+@autobind
+class A {}
+
+// 编译后
+A = autobind(A);
+```
+
+```js
+functions autobind(target) {
+  // 遍历target的属性
+  if (isFunction(target[key])) {
+    target[key] = target[key].bind(target.property)
+  }
+}
+```
+
+
+
+
+<!-- # 其它
+* [单例](https://www.jianshu.com/p/f2cc8d2cccba) -->
