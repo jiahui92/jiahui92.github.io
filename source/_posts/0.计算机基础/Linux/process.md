@@ -24,6 +24,26 @@ kill -9 8456
 systemctl stop nginx
 ```
 
+```sh
+# win10的cmder
+## 设置alias
+lsof=NETSTAT.EXE -ano
+# 使用
+lsof | grep 3010
+kill -fW 17000
+```
+
+### 问题
+win10下被占用端口但又查找不到进程号时，可能是被Hyper设为了保留端口，此时使用`net stop winnat` 然后 `net start winnat` 即可；永久解决可以设置预留的随机端口从20000开始[参考资料](https://www.cnblogs.com/acgq/p/14765179.html)
+```sh
+# 设置Hyper的随机端口从20000开始
+netsh int ipv4 set dynamicport tcp start=20000 num=1000
+netsh int ipv4 set dynamicport udp start=20000 num=1000
+netsh int ipv6 set dynamicport tcp start=20000 num=1000
+netsh int ipv6 set dynamicport udp start=20000 num=1000
+```
+
+
 ### systemctl
 守护进程&启动管理【[参考资料](https://blog.csdn.net/skh2015java/article/details/94012643)】
 ```sh
