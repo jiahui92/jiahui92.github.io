@@ -4,6 +4,33 @@ toc: true
 date: 2020-03-07 00:00:00
 ---
 
+# 原理
+`reaction(expression, effect)`
+## expression
+`reaction.expression`函数主要做两件事情
+* 收集需要监听的变量
+* 对结果进行`===`判断是否需要执行effect
+```js
+// 假设items是个深度监听的变量
+const items = observer.deep([{a:1, b:2}]);
+
+// 当items.a发生变化时，会触发effect
+reaction(() => {
+  const arr = items.map(t => t.a);
+  return arr;
+}, () => {})
+
+// 当items.a发生变化，并且值发生变化时，才会触发effect
+reaction(() => {
+  const arr = items.map(t => t.a);
+  return arr.join(',');
+}, () => {})
+
+// 会触发第一个reaction.effect，但不会触发第二个
+items[0].a = 1;
+```
+
+
 # 调试
 ## spy
 项目复杂后，值可能会被别的地方修改，但是又找不到时
