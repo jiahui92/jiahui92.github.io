@@ -2,12 +2,13 @@
 title: index
 date: {{ date }}
 ---
-
 不同语言特性有不同的设计模式，比如
+
 * 面向对象的设计模式
 * 函数式编程
 
 设计基础原则SOLID --> 设计模式 --> 设计模式的实现
+
 * 拓展性
   * 某些API支持自定义实现
     * extend.protected
@@ -19,9 +20,10 @@ date: {{ date }}
         * webpack插件的勾子系统
         * vscode插件系统
 
-
 # 函数式编程
+
 无状态、不用赋值、使用函数组合来编程【[参考资料](https://www.zhihu.com/question/28292740)】
+
 ```
 h(g(f(x))) = (h*(g*f))(x) = ((h*g)*f)(x)
 ```
@@ -44,7 +46,10 @@ function invert (node) {
 ```
 
 ## 特性
-* 高阶函数: 接受参数为函数的函数，比如`arr.map(item => item + 1)`
+
+* 高阶函数: 接受参数为函数的函数，比如 `arr.map(item => item + 1)`
 * 函数柯里化
 * 闭包
-
+数，比如 `arr.map(item => item + 1)`
+* 函数柯里化
+* 闭包

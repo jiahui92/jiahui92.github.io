@@ -26,3 +26,23 @@ tags:
   * 单元测试
 * 公共和业务可调试性（划分bug责任的界限，没有这个界限就只能让业务去调公共代码，或者公共帮业务调代码）
 
+# rush
+* common/config
+  * .npmrc
+  * command-line.json rush自定义命令
+  * shrinkwrap.json
+* common/temp/node_modules
+* package/* & link/node_modules & webpack
+* link/node_moduels
+* common/rush.json & package/*
+
+* 目录结构
+  * 主目录
+  * webpack \ node_moduels
+* 核心文件
+* 常用命令
+  * npm i
+  * rush update
+  * 自定义
+* 同类竞品
+  * 微前端

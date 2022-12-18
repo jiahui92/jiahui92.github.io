@@ -6,6 +6,9 @@ date: 2020-04-07 00:00:07
 tags:
 ---
 
+# 编译工具链
+c++build
+
 # node-gyp
 跨平台的打包工具，在win下会使用`visual studio c++ build tool`来打包代码，而在mac下使用`xcode`打包代码;
 
