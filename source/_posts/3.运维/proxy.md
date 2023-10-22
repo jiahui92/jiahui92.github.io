@@ -166,3 +166,17 @@ cat /etc/resolv.conf
 ||.proxy.com^
 @@unproxy.com^
 ```
+
+## clash
+### 开多个代理后超过tcp最大数量
+https://blog.csdn.net/xinfeixiang2019/article/details/103474065
+```sh
+netsh int ipv4 show dynamicport tcp
+
+netsh interface ipv4 show tcpstats
+netsh int ipv4 set dynamicport tcp start=20000 num=40000
+```
+
+修改注册表
+https://blog.csdn.net/weixin_43866043/article/details/111152111
+https://learn.microsoft.com/en-US/troubleshoot/windows-client/networking/connect-tcp-greater-than-5000-error-wsaenobufs-10055
