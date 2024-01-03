@@ -96,6 +96,7 @@ git show stash@{0}
 ```sh
 # 查看已删除的commit（包括git stash drop, git reset --hard）
 # git fsck --unreachable | grep commit
+# git fsck --lost-found | grep commit
 git reflog
 # 查看commit1, commit2, commit3的详细内容
 git show -q commit1 commit2 commit3
@@ -111,6 +112,12 @@ git branch -D xxx
 # 设置git config
 git config --local -e  # 对应文件~/myproject/.git/config
 git config --global -e  # 对应文件~/.gitconfig
+```
+
+```sh
+git work add  ../new-branch-projecy
+git worktree remove ../new-branch-projecy
+
 ```
 
 ## Gitlab
