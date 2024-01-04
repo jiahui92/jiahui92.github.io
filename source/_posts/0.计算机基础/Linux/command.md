@@ -96,6 +96,9 @@ ssh root@yourdomain.com
 # 生成~/.ssh/id_rsa.pub和id_rsa
 ssh-keygen -t rsa 'xxxx'
 
+eval `ssh-agent -s`
+ssh-add -K ~/.ssh/id_rsa
+
 # 将本地用ssh-keygen生成的的`~/.ssh/id_rsa.pub`复制或追加到服务器的`~/.ssh/authorized_keys`
 scp -r ~/.ssh/id_rsa.pub root@yourdomain.com:~/.ssh/authorized_keys
 ```

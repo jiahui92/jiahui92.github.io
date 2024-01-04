@@ -18,9 +18,9 @@ tags:
 git config增加配置
 ```toml
 [http "https://github.com"]
-  proxy = socks5://127.0.0.1:1086
+  proxy = socks5://127.0.0.1:7890
 [https "https://github.com"]
-  proxy = socks5://127.0.0.1:1086
+  proxy = socks5://127.0.0.1:7890
 ```
 
 ## commit规范
