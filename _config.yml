@@ -3,19 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: guangjun's wiki
+title: jiahui's wiki
 subtitle: '光军的博客'
 description: '光军的博客'
 keywords: '光军,博客,wiki,前端'
-author:  guangjun
-icp: 粤ICP备19110117号-1
+author:  jiahui
+icp: 
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://jiahui92.github.io
-root: /blog/
+root: /
 permalink: wiki/:title/
 permalink_defaults:
 pretty_urls:
