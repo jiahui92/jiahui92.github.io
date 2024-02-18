@@ -14,7 +14,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.guangjun.club
+url: https://jiahui92.github.io/blog
 root: /
 permalink: wiki/:title/
 permalink_defaults:
@@ -125,7 +125,7 @@ sitemap:
 nofollow:
   enable: true
   exclude:
-    - guangjun.club # eg: zthxxx.me
+    - github.com # eg: zthxxx.me
 
 ## Themes: https://hexo.io/themes/
 theme: Wikitten
