@@ -42,6 +42,7 @@
 
 
 ## dev
+本项目依赖的hexo版本比较低，`npm run build`时依赖nodev12，否则会导致build出来的文件全是空白
 ```sh
 npm i
 npm start

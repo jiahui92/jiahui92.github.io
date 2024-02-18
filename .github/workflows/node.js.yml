@@ -28,6 +28,7 @@ jobs:
 
     strategy:
       matrix:
+        # 本项目的hexo版本较旧，依赖旧版本的nodev12 (https://zhuanlan.zhihu.com/p/491881992)
         node-version: [12.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     environment:
