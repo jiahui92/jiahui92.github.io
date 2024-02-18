@@ -45,6 +45,8 @@
 ```sh
 npm i
 npm start
+# 生成static并部署到github pages
+npm deploy -g
 ```
 
 
