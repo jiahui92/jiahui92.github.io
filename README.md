@@ -49,6 +49,7 @@ npm start
 
 ## github actions
 * `.github/workflows/node.js.yml`文件中定义了自定义部署，每当master代码更新后会自动触发打包，发布到github pages
+* 第一次`npm run build`配置需调整`./_config.yml`里的url和root，否则会影响前端资源的相对路径，导致部分css 404
 
 ## tech
 * [hexo](https://hexo.io/)

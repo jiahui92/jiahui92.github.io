@@ -28,7 +28,7 @@ customize:
     favicon: /img/logo.png # path to favicon
     default_index_file: index.md # if this, it will display at site index instead of default index page
     social_links:
-        github: https://guangjun.club
+        github: https://github.com/jiahui92
         # stack-overflow: http://stackoverflow.com/xxx
         # codepen: http://codepen.io/xxx/
         rss: /atom.xml
