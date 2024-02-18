@@ -15,7 +15,13 @@ tags:
 
 
 ## git走代理
-git config增加配置
+* 如果clash开启了`TUN Mode`，并且使用git ssh来验证权限，则需新增`clash rules`不代理22端口的请求(`- DST-PORT,22,DIRECT`)，否则可能会报以下错误
+```sh
+kex_exchange_identification: Connection closed by remote host
+Connection closed by 198.18.0.251 port 22
+fatal: Could not read from remote repository.
+``` 
+* 如果使用小飞机等工具的系统代理，则需手动给git config增加配置
 ```toml
 [http "https://github.com"]
   proxy = socks5://127.0.0.1:7890

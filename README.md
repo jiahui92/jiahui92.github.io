@@ -1,5 +1,5 @@
 
-[传送门](https://guangjun.club)
+[传送门](https://jiahui92.github.io/blog)
 
 ## why this
 * 将零散知识逐步结构化整理
@@ -49,6 +49,8 @@ npm start
 npm deploy -g
 ```
 
+## github actions
+* `.github/workflows/node.js.yml`文件中定义了自定义部署，每当master代码更新后会自动触发打包，发布到github pages
 
 ## tech
 * [hexo](https://hexo.io/)

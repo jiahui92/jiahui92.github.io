@@ -180,3 +180,17 @@ netsh int ipv4 set dynamicport tcp start=20000 num=40000
 修改注册表
 https://blog.csdn.net/weixin_43866043/article/details/111152111
 https://learn.microsoft.com/en-US/troubleshoot/windows-client/networking/connect-tcp-greater-than-5000-error-wsaenobufs-10055
+
+### 自定义配置
+```yaml
+parsers: # array
+  - url: your_subcribe_url.com
+    yaml:
+      commands:
+        - dns.enhanced-mode=fake-ip
+      prepend-rules:
+        - DST-PORT,22,DIRECT # github ssh
+        - DOMAIN-SUFFIX,mypikpak.com,DIRECT
+        - DOMAIN-SUFFIX,staticfile.org,🚀 节点选择
+        - DOMAIN-SUFFIX,jetbrains.com,🚀 节点选择
+```
