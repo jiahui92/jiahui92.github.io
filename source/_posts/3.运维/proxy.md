@@ -184,13 +184,15 @@ https://learn.microsoft.com/en-US/troubleshoot/windows-client/networking/connect
 ### 自定义配置
 ```yaml
 parsers: # array
-  - url: your_subcribe_url.com
+  - url: your_subcribe_url.com # 这里的url一定要和订阅的url一样
     yaml:
       commands:
         - dns.enhanced-mode=fake-ip
       prepend-rules:
-        - DST-PORT,22,DIRECT # github ssh
+        - DOMAIN-SUFFIX,bing.com,DIRECT
         - DOMAIN-SUFFIX,mypikpak.com,DIRECT
         - DOMAIN-SUFFIX,staticfile.org,🚀 节点选择
         - DOMAIN-SUFFIX,jetbrains.com,🚀 节点选择
+        - DOMAIN-SUFFIX,openai.com,🇸🇬 新加坡节点
+        - DST-PORT,22,DIRECT # github ssh
 ```
