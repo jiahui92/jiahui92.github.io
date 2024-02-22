@@ -65,15 +65,26 @@ tags:
 
 
 # 微前端
-[参考资料](https://juejin.im/post/6844904182814605325)
+* 相比微应用的特点是 框架无关，页面渲染可以混用React、Vue等框架，甚至是同框架不同版本；[micro-app](https://micro-zoe.github.io/micro-app/docs.html#/)
+* [参考资料](https://juejin.im/post/6844904182814605325)
+* 对比看`多应用+npm` --> `rush巨型应用(mono repo)` 的项目模式
 
-[Module Federation](https://juejin.im/post/6844904169405415432)
-
-[Module Dederation 2](https://mp.weixin.qq.com/s/sdIVsfmRlhDtT6DF2dmsJQ)
-
+```md
 多个项目需要同步修改webpack之类的配置文件
 * 抽npm包不太行，还是需要同步修改版本号
   * 微前端可能是个解决方案
     * 怎么结合docker.volumn来只打包必要的打包呢？
-      * 同时还要支持多个类型：pc, h5 , taro
+      * 同时还要支持多个类型：pc, h5, taro
+```
 
+## 微应用
+* 将巨型项目拆成多个应用（或者将多个小应用集成一个微应用，相当于折中优化？），借助webpack module dederation分开打包，并且每个应用可以对外暴露逻辑+依赖共享(需通过await import使用)；
+* 编译优化
+  * 如果用remote包则比二次缓存的方案更快
+* 工程优化
+  * 各应用可以很轻松使用不同版本的React
+  * 理论上各应用可以单独打包、发布（其余使用remote包）
+
+参考资料
+* [Module Federation 2](https://mp.weixin.qq.com/s/sdIVsfmRlhDtT6DF2dmsJQ)
+* [Module Federation](https://juejin.im/post/6844904169405415432)
