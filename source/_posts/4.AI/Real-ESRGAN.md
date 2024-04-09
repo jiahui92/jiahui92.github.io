@@ -15,7 +15,7 @@ title: 画质增强
 
 # 例子
 转换视频需要搭配`ffmpeg`来使用，先将视频转成图片，再进行画质增强
-```shell
+```sh
 # 裁剪视频（copy不编码可能会导致音画不同步）
 # ffmpeg -i video.mp4 -ss 00:10:00 -t 00:00:10 -c:v copy -c:a copy video_split.mp4
 ffmpeg -i video.mp4 -ss 00:10:00 -to 00:10:10 video_split.mp4
