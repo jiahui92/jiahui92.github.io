@@ -5,6 +5,12 @@ date: 2020-03-02 00:00:01
 tags:
 ---
 
+常用框架有
+* express, koa
+* nestjs: 偏java的spring框架，依赖注入、官方集成了gql，微服务等功能（midway类似）
+* next.js / nuxt.js: SSR
+
+
 ## 常用库
 * koa-router
 * koa-static
