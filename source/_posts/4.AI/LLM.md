@@ -20,3 +20,10 @@ docker run -d --name=maxkb -p 8080:8080 -v ~/.maxkb:/var/lib/postgresql/data 1pa
 ## 接入ollama
 如果ollama在宿主机，配置api时: http://host.docker.internal:11434/
 
+
+# auto-gpt
+```sh
+docker run significantgravitas/auto-gpt
+  - OPENAI_API_KEY=<your-open-api-key>
+  - GPT3_ONLY=TRUE
+```
