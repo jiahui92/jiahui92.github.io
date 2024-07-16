@@ -9,7 +9,7 @@ title: LLM
 ```sh
 ollama run qwen2
 ```
-
+* 可视化版本: [LM Studio](https://lmstudio.ai/)（商业上不可直接用、需翻墙）
 
 # maxkb
 支持使用已有文档结合LLM建立知识库来进行问答（支持chatGPT、ollama等）【[官网](https://github.com/1Panel-dev/MaxKB)】
