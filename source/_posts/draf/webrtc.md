@@ -18,20 +18,8 @@ Web Real-Time Communication
 * SDP: 协商使用何种格式/类型的video等数据进行传输
   * offer, answer
 
-```js
-// 可获取到本地和公网的ip
-const pc = new RTCPeerConnection({
-    iceServers:[{
-        urls: ['stun:stun.l.google.com:19302'],
-        username: '',
-        credential: ''
-    }];
-});
+如无特殊情况，建议使用[peerjs](https://github.com/peers/peerjs)，自带免费的信令服务器用于交换ice，api也十分简洁【[demo](https://github.com/jiahui92/playground/blob/master/web-rtc/src/web-rtc.ts)】
 
-pc.onicecandidate = e => console.log('candidate: ', e.candidate)
-pc.icegatheringstatechange = () => console.log('icegatheringstate: ', pc.iceGatheringState)
-pc.setLocalDescription();
-```
 
 
 # NAT的穿透性

@@ -12,11 +12,11 @@ tags:
 
 
 
-## 宏任务 macrotask
-script、setTimeout、setImmediate、setInterval、ajax、domEvent(click等)、postMessage
+## 宏任务 task
+script、setTimeout、setImmediate、setInterval、ajax、domEvent(click等)
 
 ## 微任务 microtask
-Promise、observer、MutationObserver
+Promise、observer、MutationObserver、postMessage
 process.nextTiick
 
 
