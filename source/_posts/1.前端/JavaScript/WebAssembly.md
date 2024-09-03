@@ -5,14 +5,16 @@ date: 2020-03-01 00:00:04
 tags:
 ---
 
-兼容性87%  IE全军覆没
+兼容性96%  IE全军覆没
 
-https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html
-* 开发语言：TypeScript, c/c++等
-* 性能：弥补js计算慢的缺点
-	* 音视频处理: flv.js
-	* domDiff
-	* 游戏引擎
+* 开发语言：AssemblyScript/TypeScript, c/c++等
+* 性能：弥补js计算慢的缺点，但通常wasm还会与js交互，实际还是慢于原生
+	* 音视频处理: FFmpeg.wasm, flv.js
+	* 视觉相关: OpenCV.js
+	* TensorFlow.js with WASM Backend
+	* 数据库: SQLite-wasm
+	* 解压缩Zstd.js
+	* 图片裁剪
 
 
 ```js
