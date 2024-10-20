@@ -33,13 +33,14 @@ tags:
 * 拉新
 
 ### seo tech checklist
-* favicon
-* title, keyword, desc
-* sitemap
-* robots.txt
-* google analytics
-* [JSON-LD](https://schema.org/docs/schemas.html)
-* open graph
+* [ ] favicon
+* [ ] title(50), desc(150)
+* [ ] sitemap
+* [ ] robots.txt
+* [ ] google analytics
+* [ ] [JSON-LD](https://schema.org/docs/schemas.html)
+* [ ] open graph
   * title, description, image
   * site_name, url, type
   * updated_time, author, article
+* [ ] backlinks
