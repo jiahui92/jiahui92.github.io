@@ -174,7 +174,7 @@ cat 1.txt | grep 'enabled'
 ### 权限管理
 ![](/img/Snip20200305_34.png)
 ```sh
-ls -lh
+ls -lh # 查看设置后的权限
 
 总用量 8.0K
 drwxr-xr-x 16 root root 4.0K 2月  26 22:29 playground
@@ -190,7 +190,7 @@ drwxr-xr-x 11 root root 4.0K 2月  27 14:13 server
 ```sh
 chown -R guangjun . # 修改所有者
 chgrp -R staff . # 修改所属组
-chmod 777 .  # 777表示rwxrwxrwx
+chmod 777 .  # 777表示rwxrwxrwx (u=rwx, g=rwx, o=rwx)  user, group, other
 chmod +x a.sh # 增加可执行权限
 ```
 
