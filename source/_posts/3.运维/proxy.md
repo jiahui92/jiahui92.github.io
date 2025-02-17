@@ -184,15 +184,180 @@ https://learn.microsoft.com/en-US/troubleshoot/windows-client/networking/connect
 ### 自定义配置
 ```yaml
 parsers: # array
-  - url: your_subcribe_url.com # 这里的url一定要和订阅的url一样
+  - url: https://ss-subs.paofusub2.com/sub?target=clash&interval=259200&url=https%3A%2F%2Fwww.paofusub2.com%2Flink%2FZiDgimyxSY8P6NwD%3Fsub%3D1&insert=false&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FPaofu-cloud%2Fclashrules%40main%2Fclash.ini&filename=PaofuCloud&emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true
     yaml:
       commands:
         - dns.enhanced-mode=fake-ip
       prepend-rules:
+        - DOMAIN-SUFFIX,amazonaws.com,🇸🇬 新加坡节点
+        - DOMAIN-SUFFIX,google-analytics.com,DIRECT
+        - DOMAIN-SUFFIX,paofu.cloud,📲 Telegram
+        - DOMAIN-SUFFIX,gstatic.com,📲 Telegram
+        - DOMAIN-SUFFIX,sentry.io,📲 Telegram
+        - DOMAIN-SUFFIX,googlesyndication.com,📲 Telegram
+        - DOMAIN-SUFFIX,netflix.com,📲 Telegram
+        - DOMAIN-SUFFIX,similarweb.com,📲 Telegram
+        - DOMAIN-SUFFIX,microsoft.com,📲 Telegram
+        - DOMAIN-SUFFIX,jsdelivr.net,📲 Telegram
+        - DOMAIN-SUFFIX,ahrefs.com,📲 Telegram
+        - DOMAIN-SUFFIX,pndsn.com,📲 Telegram
+        - DOMAIN-SUFFIX,cursor.sh,📲 Telegram
+        - DOMAIN-SUFFIX,githubassets.com,📲 Telegram
+        - DOMAIN-SUFFIX,visualstudio.com,📲 Telegram
+        - DOMAIN-SUFFIX,azure.cn,📲 Telegram
+        - DOMAIN-SUFFIX,ko-fi.com,📲 Telegram
+        - DOMAIN-SUFFIX,steampowered.com,📲 Telegram
+        - DOMAIN-SUFFIX,lemonsqueezy.com,📲 Telegram
+        - DOMAIN-SUFFIX,stripe.com,📲 Telegram
+        - DOMAIN-SUFFIX,stripecdn.com,📲 Telegram
+        - DOMAIN-SUFFIX,vercel.com,📲 Telegram
+        - DOMAIN-SUFFIX,jwt.io,📲 Telegram
+        - DOMAIN-SUFFIX,canva.com,📲 Telegram
+        - DOMAIN-SUFFIX,tailwindcss.com,📲 Telegram
+        - DOMAIN-SUFFIX,x.com,📲 Telegram
+        - DOMAIN-SUFFIX,youtube.com,📲 Telegram
+        - DOMAIN-SUFFIX,pmnd.rs,📲 Telegram
+        - DOMAIN-SUFFIX,chatgptextension.ai,📲 Telegram
+        - DOMAIN-SUFFIX,investing.com,📲 Telegram
+        - DOMAIN-SUFFIX,bsky.app,📲 Telegram
+        - DOMAIN-SUFFIX,bsky.social,📲 Telegram
+        - DOMAIN-SUFFIX,bsky.network,📲 Telegram
+        - DOMAIN-SUFFIX,chrome-stats.com,📲 Telegram
+        - DOMAIN-SUFFIX,githubusercontent.com,📲 Telegram
+        - DOMAIN-SUFFIX,github.com,📲 Telegram
+        - DOMAIN-SUFFIX,1337x.to,📲 Telegram
         - DOMAIN-SUFFIX,bing.com,DIRECT
-        - DOMAIN-SUFFIX,mypikpak.com,DIRECT
-        - DOMAIN-SUFFIX,staticfile.org,🚀 节点选择
-        - DOMAIN-SUFFIX,jetbrains.com,🚀 节点选择
-        - DOMAIN-SUFFIX,openai.com,🇸🇬 新加坡节点
-        - DST-PORT,22,DIRECT # github ssh
+        - DOMAIN-SUFFIX,google.com,📲 Telegram
+        - DOMAIN-SUFFIX,googleapis.com,📲 Telegram
+        - DOMAIN-SUFFIX,googleusercontent.com,📲 Telegram
+        - DOMAIN-SUFFIX,gstatic.com,📲 Telegram
+        - DOMAIN-SUFFIX,cloudflare.com,📲 Telegram
+        - DOMAIN-SUFFIX,cloudflarestorage.com,📲 Telegram
+        - DOMAIN-SUFFIX,cloudflareinsights.com,📲 Telegram
+        - DOMAIN-SUFFIX,reddit.com,📲 Telegram
+        - DOMAIN-SUFFIX,redditspace.com,📲 Telegram
+        - DOMAIN-SUFFIX,facebook.com,📲 Telegram
+        - DOMAIN-SUFFIX,vercel.app,📲 Telegram
+        - DOMAIN-SUFFIX,npmjs.com,📲 Telegram
+        - DOMAIN-SUFFIX,perplexity.ai,📲 Telegram
+        - DOMAIN-SUFFIX,lumalabs.ai,📲 Telegram
+        - DOMAIN-SUFFIX,chatgpt.com,📲 Telegram
+        - DOMAIN-SUFFIX,oaistatic.com,📲 Telegram
+        - DOMAIN-SUFFIX,oaiusercontent.com,📲 Telegram
+        - DOMAIN-SUFFIX,openai.com,📲 Telegram
+        - DOMAIN-SUFFIX,claude.ai,📲 Telegram
+        - DOMAIN-SUFFIX,anthropic.com,📲 Telegram
+        - DOMAIN-SUFFIX,crawlee.dev,📲 Telegram
+        - DOMAIN,tubi.tv,📲 Telegram
+        - DOMAIN,tubi.io,📲 Telegram
+        - DOMAIN,nextui.org,📲 Telegram
+        - DOMAIN,tubitv.com,📲 Telegram
+        - DOMAIN-SUFFIX,mypikpak.com,🇸🇬 新加坡节点
+        - DOMAIN-SUFFIX,hexo.io,📲 Telegram
+        - DOMAIN-SUFFIX,staticfile.org,📲 Telegram
+        - DOMAIN-SUFFIX,jetbrains.com,📲 Telegram
+        - DOMAIN-SUFFIX,steamcommunity.com,📲 Telegram
+        - DOMAIN-SUFFIX,rockstartgames.com,📲 Telegram
+        - DOMAIN-SUFFIX,wmzhe.com,📲 Telegram
+        - DOMAIN,yarnpkg.com,📲 Telegram
+        - PROCESS-NAME,Rockstart*,📲 Telegram
+        - PROCESS-NAME,node.exe,Crawlee
+        - DST-PORT,22,DIRECT
+      append-proxy-groups:
+        - name: Crawlee
+          type: load-balance
+          strategy: round-robin
+          url: http://www.gstatic.com/generate_204
+          interval: 3 # 30s测试一次，然后切换服务器
+          lazy: true
+          # tolerance: 2000
+          # include-all: true # 引用所有 proxies
+          # filter: 'HK|香港' # 筛选含有 HK 或香港关键字的代理
+          proxies:
+            - 🇭🇰 [v1] 香港・01
+            - 🇭🇰 [v1] 香港・02
+            - 🇭🇰 [v1] 香港・03
+            - 🇭🇰 [v1] 香港・04
+            - 🇭🇰 [v1] 香港・05
+            - 🇭🇰 [v1] 香港・06
+            - 🇭🇰 [v1] 香港・07
+            - 🇭🇰 [v1] 香港・08
+            - 🇭🇰 [v1] 香港・09
+            - 🇭🇰 [v1] 香港・10
+            - 🇭🇰 [v3] 香港・01
+            - 🇭🇰 [v3] 香港・02
+            - 🇭🇰 [v3] 香港・03
+            - 🇭🇰 [v3] 香港・04
+            - 🇭🇰 [v3] 香港・05
+            - 🇭🇰 [v3] 香港・06
+            - 🇭🇰 [v3] 香港・07
+            - 🇭🇰 [v3] 香港・08
+            - 🇭🇰 [v3] 香港・09
+            - 🇭🇰 [v3] 香港・10
+            - 🇨🇳 [v1] 台湾・01
+            - 🇨🇳 [v1] 台湾・02
+            - 🇨🇳 [v1] 台湾・03
+            - 🇨🇳 [v1] 台湾・04
+            - 🇨🇳 [v1] 台湾・05
+            - 🇨🇳 [v3] 台湾・01
+            - 🇨🇳 [v3] 台湾・02
+            - 🇨🇳 [v3] 台湾・03
+            - 🇨🇳 [v3] 台湾・04
+            - 🇸🇬 [v1] 新加坡・01
+            - 🇸🇬 [v1] 新加坡・02
+            - 🇸🇬 [v1] 新加坡・03
+            - 🇸🇬 [v1] 新加坡・04
+            - 🇸🇬 [v1] 新加坡・05
+            - 🇸🇬 [v3] 新加坡・01
+            - 🇸🇬 [v3] 新加坡・02
+            - 🇸🇬 [v3] 新加坡・03
+            - 🇸🇬 [v3] 新加坡・04
+            - 🇺🇸 [v1] 美国・01
+            - 🇺🇸 [v1] 美国・02
+            - 🇺🇸 [v1] 美国・03
+            - 🇺🇸 [v1] 美国・04
+            - 🇺🇸 [v1] 美国・05
+            - 🇺🇸 [v3] 美国・01
+            - 🇺🇸 [v3] 美国・02
+            - 🇺🇸 [v3] 美国・03
+            - 🇺🇸 [v3] 美国・04
+            - 🇯🇵 [v1] 日本・01
+            - 🇯🇵 [v1] 日本・02
+            - 🇯🇵 [v1] 日本・03
+            - 🇯🇵 [v1] 日本・04
+            - 🇯🇵 [v1] 日本・05
+            - 🇯🇵 [v3] 日本・01
+            - 🇯🇵 [v3] 日本・02
+            - 🇯🇵 [v3] 日本・03
+            - 🇯🇵 [v3] 日本・04
+        - name: Crawlee.hk
+          type: load-balance
+          strategy: round-robin
+          url: http://www.gstatic.com/generate_204
+          interval: 3 # 30s测试一次，然后切换服务器
+          lazy: true
+          # tolerance: 2000
+          # include-all: true # 引用所有 proxies
+          # filter: 'HK|香港' # 筛选含有 HK 或香港关键字的代理
+          proxies:
+            - 🇭🇰 [v1] 香港・01
+            - 🇭🇰 [v1] 香港・02
+            - 🇭🇰 [v1] 香港・03
+            - 🇭🇰 [v1] 香港・04
+            - 🇭🇰 [v1] 香港・05
+            - 🇭🇰 [v1] 香港・06
+            - 🇭🇰 [v1] 香港・07
+            - 🇭🇰 [v1] 香港・08
+            - 🇭🇰 [v1] 香港・09
+            - 🇭🇰 [v1] 香港・10
+            - 🇭🇰 [v3] 香港・01
+            - 🇭🇰 [v3] 香港・02
+            - 🇭🇰 [v3] 香港・03
+            - 🇭🇰 [v3] 香港・04
+            - 🇭🇰 [v3] 香港・05
+            - 🇭🇰 [v3] 香港・06
+            - 🇭🇰 [v3] 香港・07
+            - 🇭🇰 [v3] 香港・08
+            - 🇭🇰 [v3] 香港・09
+
 ```
