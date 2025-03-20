@@ -361,3 +361,22 @@ parsers: # array
             - 🇭🇰 [v3] 香港・09
 
 ```
+
+#### 绕过防火墙
+有时候会因为防火墙被屏蔽了
+```sh
+# 关闭防火墙后，重启TUN模式测试下
+netsh advfirewall set allprofiles state off
+netsh advfirewall set allprofiles state on
+
+# 给防火墙添加例外规则
+## 允许 Clash 进程通过防火墙
+netsh advfirewall firewall add rule name="Allow Clash" dir=in action=allow program="D:\clash\Clash for Windows.exe"
+netsh advfirewall firewall add rule name="Allow Clash TUN" dir=in action=allow protocol=any localport=any
+## 允许 Clash TUN 适配器流量
+netsh advfirewall firewall add rule name="Allow Clash TUN" dir=out action=allow protocol=any localport=any
+netsh advfirewall firewall add rule name="Allow Clash DNS" dir=in action=allow protocol=UDP localport=53
+
+## 检测 clash 相关例外规则
+netsh advfirewall firewall show rule name=all | findstr Clash
+```
