@@ -83,3 +83,22 @@ server {
   }
 }
 ```
+
+## ubuntu@22.04 & docker@28
+#### Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+安装完毕后`docker ps`会报错 [参考资料](https://dev.to/felipecrs/simply-run-docker-on-wsl2-3o8)
+* 貌似之前设置少了docker的用户权限相关设置，设置完毕后再重启ubuntu
+
+#### Error response from daemon: Get "https://registry-1.docker.io/v2/": net/http: TLS handshake timeout
+设置docker镜像代理 [参考资料](https://neucrack.com/p/286)
+```sh
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf
+
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:7890"
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
