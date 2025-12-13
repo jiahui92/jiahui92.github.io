@@ -1,0 +1,62 @@
+---
+title: code
+# toc: true
+
+---
+
+* cursor
+* vscode
+  * continue + openrouter : 70% cursor的交互体验，更便宜的模型api
+  * copilot
+
+
+## continue
+
+* [quick-start](https://docs.continue.dev/ide-extensions/quick-start)
+* [recommended-models](https://docs.continue.dev/customize/models#recommended-models)
+
+```yaml
+name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: google/gemini-2.0-flash-exp:free
+    provider: openrouter
+    model: google/gemini-2.0-flash-exp:free
+    apiKey: your_api_key
+    roles:
+      - chat
+      - autocomplete
+      - edit
+  - name: kwaipilot/kat-coder-pro:free
+    provider: openrouter
+    model: kwaipilot/kat-coder-pro:free
+    apiKey: your_api_key
+    roles:
+      - chat
+      - autocomplete
+      - edit
+  - name: gemma-3-27b
+    provider: gemini
+    model: gemma-3-27b
+    apiKey: your_api_key
+    roles:
+      - chat
+      - autocomplete
+      - edit
+```
+
+### 高级用法
+
+* [config](https://docs.continue.dev/reference)
+  * rules
+  * prompts
+  * docs
+  * mcp
+* Integrations
+  * github/gitlab
+  * sentry
+  * slack/teams
+  * webhook
+* [workflows](https://hub.continue.dev/workflows)
+* cli
