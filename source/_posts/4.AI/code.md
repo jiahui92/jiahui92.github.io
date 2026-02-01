@@ -5,6 +5,15 @@ title: code
 ---
 
 * cursor
+* claudecode/codex
+  * AGENTS.md
+    * prompt
+      * code templates
+    * context
+      * components
+      * utils
+  * openspec / spect kit / BMad
+
 * vscode
   * continue + openrouter : 70% cursor的交互体验，更便宜的模型api
   * copilot
