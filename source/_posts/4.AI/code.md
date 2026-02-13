@@ -18,6 +18,19 @@ title: code
   * continue + openrouter : 70% cursor的交互体验，更便宜的模型api
   * copilot
 
+## cursor
+## Agent Review
+
+本地设置cursor提交代码时自动review的对比分支
+
+```sh
+# https://forum.cursor.com/t/how-to-change-the-default-branch-for-cursor/146478/2
+git remote set-head origin your_branch
+# 设置完毕后重启cursor
+
+# 测试是否设置成功 or 看Cursor Agent Review区域的分支
+git symbolic-ref --short refs/remotes/origin/HEAD
+```
 
 ## continue
 
