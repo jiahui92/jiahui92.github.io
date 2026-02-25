@@ -5,21 +5,30 @@ title: code
 ---
 
 * cursor
-* claudecode/codex
-  * AGENTS.md
-    * prompt
-      * code templates
-    * context
-      * components
-      * utils
-  * openspec / spect kit / BMad
-
-* vscode
-  * continue + openrouter : 70% cursor的交互体验，更便宜的模型api
-  * copilot
+* claudecode/opencode
 
 ## cursor
-## Agent Review
+* rules
+  * AGENTS.md
+* prompts
+  * context
+    * components
+    * utils
+    * hooks
+    * code templates
+  * workfolw
+* commands
+  * openspec / spect kit / BMad
+* skills
+* sub agent?
+* MCP
+  * figma
+  * browser automation
+    * rules: TESTING.md
+* plugins
+
+
+## Agent CodeReview
 
 本地设置cursor提交代码时自动review的对比分支
 
